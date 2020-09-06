@@ -6,8 +6,9 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import SplashScreen from 'react-native-splash-screen';
+import 'react-native-gesture-handler';
+
+import * as React from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,102 +16,79 @@ import {
   View,
   Text,
   StatusBar,
+  Button
 } from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import ECScreen from './app/components/EmergencyCallScreen';
+import ITScreen from './app/components/InstantTranslationScreen';
+import MIScreen from './app/components/MedicalInsuranceScreen';
+import MRScreen from './app/components/MedicalRecordScreen';
+import OBScreen from './app/components/OnlineBookingScreen';
+import SCScreen from './app/components/SymptomCheckerScreen';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 
-const App: () => React$Node = () => {
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button 
+        title="Emergency Call1"
+        onPress={() => navigation.navigate('EmergencyCall')}
+        style={styles.button}
+      />
+      <Button
+        title="Instant Translation"
+        onPress={() => navigation.navigate('InstantTranslation')}
+      />
+      <Button
+        title="Medical Insurance"
+        onPress={() => navigation.navigate('MedicalInsurance')}
+      />
+      <Button
+        title="Medical Record"
+        onPress={() => navigation.navigate('MedicalRecord')}
+      />
+      <Button
+        title="Online Booking"
+        onPress={() => navigation.navigate('OnlineBooking')}
+      />
+      <Button
+        title="Symptom Checker"
+        onPress={() => navigation.navigate('SymptomChecker')}
+      />
+      
+    </View>
+  );
+}
+  
+
+const Stack = createStackNavigator();
+
+function App() {
   SplashScreen.hide();
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One Peigeng LI</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Medical_AU'}}/>
+       
+        <Stack.Screen name="EmergencyCall" component={ECScreen} />
+        <Stack.Screen name="InstantTranslation" component={ITScreen} />
+        <Stack.Screen name="MedicalInsurance" component={MIScreen} />
+        <Stack.Screen name="MedicalRecord" component={MRScreen} />
+        <Stack.Screen name="OnlineBooking" component={OBScreen} />
+        <Stack.Screen name="SymptomChecker" component={SCScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
+    button: {
+      backgroundColor: 'yellow',
+    },
+  });
+
 
 export default App;
