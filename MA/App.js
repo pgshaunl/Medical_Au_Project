@@ -26,6 +26,7 @@ import OBScreen from './app/components/OnlineBookingScreen';
 import SCScreen from './app/components/SymptomCheckerScreen';
 import Search from './app/components/SearchHomeScreen';
 import HeaderScreen from './app/components/HeaderScreen';
+import CarouselScreen from './app/components/CarouselScreen';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 
 
@@ -37,11 +38,16 @@ function HomeScreen({ navigation }) {
   return (
     <View>
       <HeaderScreen></HeaderScreen>
+
       <View style = {{flexDirection: 'row', justifyContent:"center"}}>
         <Search></Search>
       </View>
-      <View style={{marginTop: 50}} >
       
+      <View style={{margin:10}}>
+      <CarouselScreen></CarouselScreen>
+      </View>
+
+      <View style={{marginTop: 20}} >
       <View style={{flexDirection: 'row', justifyContent:"space-evenly",}} >
       <TouchableHighlight onPress={() => navigation.navigate('MedicalRecord')} style = {styles.buttonContainer}>
         <View style={styles.button}>
@@ -98,10 +104,10 @@ function HomeScreen({ navigation }) {
         <TouchableHighlight onPress={() => navigation.navigate('MedicalInsurance')} style = {styles.buttonContainer}>
           <View style={styles.button}>
             <Image
-            source={require('./app/img/icons/SC.png')}
+            source={require('./app/img/icons/MI.png')}
             style={styles.image}
             />
-            <View style={styles.text}><Text>Medical</Text><Text>Checker</Text></View>
+            <View style={styles.text}><Text>Medical</Text><Text>Insurance</Text></View>
           </View>
         </TouchableHighlight>
       </View>
