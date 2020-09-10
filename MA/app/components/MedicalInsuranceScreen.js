@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import HeaderScreen from './HeaderScreen';
 
 class MIScreen extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
+      <View>
+        <HeaderScreen></HeaderScreen>
         <Text>Medical Insurance here!</Text>
       </View>
     );
