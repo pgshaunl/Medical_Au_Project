@@ -25,8 +25,9 @@ import MRScreen from './app/components/MedicalRecordScreen';
 import OBScreen from './app/components/OnlineBookingScreen';
 import SCScreen from './app/components/SymptomCheckerScreen';
 import Search from './app/components/SearchHomeScreen';
-import { TouchableHighlight} from 'react-native-gesture-handler';
-import LinearGradient from 'react-native-linear-gradient';
+import HeaderScreen from './app/components/HeaderScreen';
+import { TouchableHighlight } from 'react-native-gesture-handler';
+
 
 
 
@@ -35,6 +36,7 @@ function HomeScreen({ navigation }) {
 
   return (
     <View>
+      <HeaderScreen></HeaderScreen>
       <View style = {{flexDirection: 'row', justifyContent:"center"}}>
         <Search></Search>
       </View>
@@ -116,8 +118,22 @@ function App() {
   SplashScreen.hide();
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Medical_AU'}}/>
+      <Stack.Navigator initialRouteName="Home" screenOptions={{
+        headerStyle: {
+          backgroundColor: '#f4511e',
+          height:100,
+        },
+        headerTransparent: 'true',
+        headerTitleAlign:'center',
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontSize:30,
+        },
+      }}>
+        <Stack.Screen name="Home" component={HomeScreen} 
+        options={{ 
+          title: 'Medical_AU', 
+          }}/>
         <Stack.Screen name="EmergencyCall" component={ECScreen} options={{ title: 'Emergency Call'}}/>
         <Stack.Screen name="InstantTranslation" component={ITScreen} options={{ title: 'Instant Translation'}}/>
         <Stack.Screen name="MedicalInsurance" component={MIScreen} options={{ title: 'Medical Insurance'}}/>
@@ -160,9 +176,6 @@ const styles = StyleSheet.create({
       resizeMode: "contain",
       height: 50,
       width: 50,
-    },
-    header: {
-      backgroundColor:"yellow",
     },
   });
 

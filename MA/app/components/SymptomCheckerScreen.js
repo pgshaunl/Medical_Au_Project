@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import HeaderScreen from './HeaderScreen';
 
 class SCScreen extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
+      <View>
+        <HeaderScreen></HeaderScreen>
         <Text>Symptom Checker here!</Text>
       </View>
     );
