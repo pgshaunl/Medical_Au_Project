@@ -24,12 +24,21 @@ import MIScreen from './app/components/MedicalInsuranceScreen';
 import MRScreen from './app/components/MedicalRecordScreen';
 import OBScreen from './app/components/OnlineBookingScreen';
 import SCScreen from './app/components/SymptomCheckerScreen';
+import Search from './app/components/SearchHomeScreen';
 import { TouchableHighlight} from 'react-native-gesture-handler';
+import LinearGradient from 'react-native-linear-gradient';
+
+
 
 
 function HomeScreen({ navigation }) {
+
   return (
-    <View style={{marginTop: 50}} >
+    <View>
+      <View style = {{flexDirection: 'row', justifyContent:"center"}}>
+        <Search></Search>
+      </View>
+      <View style={{marginTop: 50}} >
       
       <View style={{flexDirection: 'row', justifyContent:"space-evenly",}} >
       <TouchableHighlight onPress={() => navigation.navigate('MedicalRecord')} style = {styles.buttonContainer}>
@@ -94,10 +103,9 @@ function HomeScreen({ navigation }) {
           </View>
         </TouchableHighlight>
       </View>
-      
-      
-    
     </View>
+    </View>
+    
   );
 }
   
@@ -152,6 +160,9 @@ const styles = StyleSheet.create({
       resizeMode: "contain",
       height: 50,
       width: 50,
+    },
+    header: {
+      backgroundColor:"yellow",
     },
   });
 
