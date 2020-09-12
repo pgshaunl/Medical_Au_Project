@@ -40,11 +40,11 @@ function HomeScreen({ navigation }) {
       <HeaderScreen></HeaderScreen>
 
       <View style = {{flexDirection: 'row', justifyContent:"center"}}>
-        <Search></Search>
+        <Search/>
       </View>
       
       <View style={{margin:10}}>
-      <CarouselScreen></CarouselScreen>
+      <CarouselScreen/>
       </View>
 
       <View style={{marginTop: 20}} >
