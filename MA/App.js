@@ -24,6 +24,7 @@ import MIScreen from './app/components/MedicalInsuranceScreen';
 import MRScreen from './app/components/MedicalRecordScreen';
 import OBScreen from './app/components/OnlineBookingScreen';
 import SCScreen from './app/components/SymptomCheckerScreen';
+import LogInScreen from './app/components/LogInScreen';
 import Search from './app/components/SearchHomeScreen';
 import HeaderScreen from './app/components/HeaderScreen';
 import CarouselScreen from './app/components/CarouselScreen';
@@ -42,24 +43,24 @@ function HomeScreen({ navigation }) {
       <View style = {{flexDirection: 'row', justifyContent:"center"}}>
         <Search/>
       </View>
-      
       <View style={{margin:10}}>
       <CarouselScreen/>
+      
       </View>
 
       <View style={{marginTop: 20}} >
-      <View style={{flexDirection: 'row', justifyContent:"space-evenly",}} >
+      <View style={{flexDirection: 'row', justifyContent:"space-evenly"}} >
       <TouchableHighlight onPress={() => navigation.navigate('MedicalRecord')} style = {styles.buttonContainer}>
         <View style={styles.button}>
           <Image
           source={require('./app/img/icons/MR.png')}
           style={styles.image}
           />
-          <View style={styles.text}><Text>Medical</Text><Text>Record</Text></View>
+          <View style={styles.text}><Text>Medicadddddl</Text><Text>Record</Text></View>
         </View>
       </TouchableHighlight>
 
-      <TouchableHighlight onPress={() => navigation.navigate('OnlineBooking')} style = {styles.buttonContainer}>
+      <TouchableHighlight onPress={() => navigation.navigate('LogIn')} style = {styles.buttonContainer}>
         <View style={styles.button}>
           <Image
           source={require('./app/img/icons/OB.png')}
@@ -80,7 +81,7 @@ function HomeScreen({ navigation }) {
       </TouchableHighlight>
       </View>
       
-      <View style={{flexDirection: 'row', justifyContent:"space-evenly",}}>
+      <View style={{flexDirection: 'row', justifyContent:"space-evenly"}}>
       <TouchableHighlight onPress={() => navigation.navigate('InstantTranslation')} style = {styles.buttonContainer}>
           <View style={styles.button}>
             <Image
@@ -146,6 +147,7 @@ function App() {
         <Stack.Screen name="MedicalRecord" component={MRScreen} options={{ title: 'Medical Record'}}/>
         <Stack.Screen name="OnlineBooking" component={OBScreen} options={{ title: 'Online Booking'}}/>
         <Stack.Screen name="SymptomChecker" component={SCScreen} options={{ title: 'Symptom Checker'}}/>
+        <Stack.Screen name="LogIn" component={LogInScreen} options={{ title: ''}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
