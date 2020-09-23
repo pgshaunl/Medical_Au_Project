@@ -1,29 +1,106 @@
 import React from 'react';
-import { StyleSheet, Text, View,TouchableOpacity, } from 'react-native';
+import { StyleSheet, Text, View,TouchableOpacity, ToastAndroid, EventEmitter, } from 'react-native';
 import HeaderScreen from './HeaderScreen';
 import LinearGradient from 'react-native-linear-gradient';
 import {Dimensions} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
+import SSCScreen from "./SymptomCheckerScreen";
+import SignUpScreen from "./SignUp";
+import { NavigationContainer, NavigationHelpersContext } from '@react-navigation/native';
+import { isConstructorDeclaration } from 'typescript';
+import { diff } from 'react-native-reanimated';
 
 const {width,height} = Dimensions.get("window");
 const buttonClick =()=>{
   Alert.alert("hello");
 }
 
-class LogInScreen extends React.Component {
+const userInfs = [{userName:'Jack',password:'123',id:1,content:"I like music"},{userName:'Jason',password:'456',id:2,content:"I like study"}];
+
+// for (let index = 0; index < userInfs.length; index++) {
+
+//   const element = userInfs[index];
+//   console.log("The " +index+" user is :"+element.id);
+  
+// }
+
+
+
+
+
+
+
+
+
+// const navigation = useNavigation();
+
+class LogInScreen  extends React.Component {
+ 
+
+  
+
+
+  username = "";
+  password = "";
+  isFound = -1;
+
+
+  onUsernameChanged = (newUsername) => {
+    console.log(newUsername);
+    this.username = newUsername;
+  }
+
+  onPasswordChanged = (newPassword) => {
+    console.log(newPassword);
+    this.password = newPassword;
+  }
+
+  login = () => {
+    
+    for (let index = 0; index < userInfs.length; index++) {
+      if(this.username == userInfs[index].userName && this.password == userInfs[index].password) {
+          this.props.navigation.navigate("Home",{userIdPass:userInfs[index].id ,userArray:userInfs[index]});
+          // console.log("dff"+userInfs[index])
+          this.isFound = 1;
+          console.log('isfound '+this.isFound);
+          break;
+        } 
+        }
+    if(this.isFound < 0) {
+        
+      ToastAndroid.show('Please input the correct password',ToastAndroid.SHORT);
+    
+  }
+    // if(this.username =='admin' && this.password =='123') {
+    //   ToastAndroid.show('successful',ToastAndroid.SHORT);
+    // } else {
+    //   ToastAndroid.show('failed',ToastAndroid.SHORT);
+    // }
+  }
+
+
   render() {
     return (
+      
       <View style={{width,height}}>
+      
        <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
         colors={['#2b78d4', '#46bbab']} 
         style={{flex: 1,
       paddingLeft: 15,
       paddingRight: 15,}}>
 
+      
+      
+      
+      
+
 
 <TouchableOpacity style={styles.buttonTitle}
          onPress={()=>{alert(1)}}>
+         {/* <TouchableOpacity style={styles.buttonTitle}
+         onPress={()=>{this.props.navigation.navigate('SymptomChecker')}}> */}
            
            <Text style={styles.buttonTextTitle}>BG</Text>
          </TouchableOpacity>
@@ -35,6 +112,7 @@ class LogInScreen extends React.Component {
   placeholderTextColor='white'
  
   marginLeft={40}
+  onChangeText={this.onUsernameChanged}
  
   
   leftIcon={
@@ -53,17 +131,19 @@ class LogInScreen extends React.Component {
 />
 
 
+
 <Input
   placeholder='Password'
   placeholderTextColor='white'
   marginLeft={40}
+  onChangeText={this.onPasswordChanged}
   
  
   
 
   leftIcon={
     <Icon
-      name='user'
+      name='lock'
       size={30}
       color='white'
       
@@ -73,19 +153,19 @@ class LogInScreen extends React.Component {
 />
 
 <TouchableOpacity style={styles.button2}
-         onPress={()=>{alert(1)}}>
+         onPress={this.login}>
            
            <Text style={styles.buttonText2}>Sign In</Text>
          </TouchableOpacity>
          <TouchableOpacity style={styles.button3}
-         onPress={()=>{alert(1)}}>
+         onPress={this.login}>
            
            <Text style={styles.buttonText3}>Forgot Password</Text>
          </TouchableOpacity>
          <TouchableOpacity style={[styles.button2,{width:300,marginLeft:40,backgroundColor:'#2b78d4'}]}
-         onPress={()=>{alert(1)}}>
+         onPress={()=>this.props.navigation.navigate("SignUp")}>
            
-           <Text style={styles.buttonText2}>Login via Facebook</Text>
+           <Text style={styles.buttonText2}>Sign Up</Text>
          </TouchableOpacity>
          <Text style={{color:'white',marginLeft:100,marginTop:15}}>Don't have an account?  Sign Up</Text>
          
@@ -98,10 +178,13 @@ class LogInScreen extends React.Component {
 
 
       </View>
+    
       
      
     );
   }
+  
+  
 }
 
 const styles = StyleSheet.create({

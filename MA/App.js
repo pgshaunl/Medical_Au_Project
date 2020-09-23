@@ -27,14 +27,43 @@ import SCScreen from './app/components/SymptomCheckerScreen';
 import LogInScreen from './app/components/LogInScreen';
 import Search from './app/components/SearchHomeScreen';
 import HeaderScreen from './app/components/HeaderScreen';
+import SignUpScreen from "./app/components/SignUp";
 import CarouselScreen from './app/components/CarouselScreen';
+import ProfileScreen from './app/components/Profile';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 
 
 
 
+//Identify the userId and whether he is log in or not
+function HomeScreen({ route,navigation }) {
+  // identifylogIn = () =>{
+  //   alert(1);
 
-function HomeScreen({ navigation }) {
+  // }
+
+   var idHome = -1000;
+   var userInfsSpec = null;
+  
+  if(route.params != null) {
+
+    var { userIdPass } = route.params;
+    idHome = userIdPass;
+    var {userArray} = route.params;
+    userInfsSpec = userArray;
+    // console.log("array " + userInfsSpec.userName);
+ 
+  console.log('This is idhome11 '+ idHome)
+  console.log("this is idPass " +JSON.stringify(userIdPass));
+  }
+  else{
+    
+    console.log('This is idhome '+ idHome)
+  }
+
+
+console.log('This is idhomedff '+ idHome)
+  
 
   return (
     <View>
@@ -50,13 +79,20 @@ function HomeScreen({ navigation }) {
 
       <View style={{marginTop: 20}} >
       <View style={{flexDirection: 'row', justifyContent:"space-evenly"}} >
-      <TouchableHighlight onPress={() => navigation.navigate('MedicalRecord')} style = {styles.buttonContainer}>
+      {/* <TouchableHighlight onPress={() => navigation.navigate('Profile',{idUser:idHome, idArrayHome:userInfsSpec})} style = {styles.buttonContainer}> */}
+      <TouchableHighlight onPress={() => {
+        if(idHome < 0) {
+          navigation.navigate("LogIn");
+        }else {
+          navigation.navigate("Profile",{idUser:idHome,idArrayHome:userInfsSpec})
+        }
+      }}style = {styles.buttonContainer}>
         <View style={styles.button}>
           <Image
           source={require('./app/img/icons/MR.png')}
           style={styles.image}
           />
-          <View style={styles.text}><Text>Medicadddddl</Text><Text>Record</Text></View>
+          <View style={styles.text}><Text>Profile</Text><Text>Record</Text></View>
         </View>
       </TouchableHighlight>
 
@@ -66,7 +102,7 @@ function HomeScreen({ navigation }) {
           source={require('./app/img/icons/OB.png')}
           style={styles.image}
           />
-          <View style={styles.text}><Text>Online</Text><Text>Booking</Text></View>
+          <View style={styles.text}><Text>Log in</Text><Text>Booking</Text></View>
         </View>
       </TouchableHighlight>
       
@@ -82,7 +118,7 @@ function HomeScreen({ navigation }) {
       </View>
       
       <View style={{flexDirection: 'row', justifyContent:"space-evenly"}}>
-      <TouchableHighlight onPress={() => navigation.navigate('InstantTranslation')} style = {styles.buttonContainer}>
+      <TouchableHighlight  onPress={   () => navigation.navigate('InstantTranslation')} style = {styles.buttonContainer}>
           <View style={styles.button}>
             <Image
             source={require('./app/img/icons/IT.png')}
@@ -148,6 +184,9 @@ function App() {
         <Stack.Screen name="OnlineBooking" component={OBScreen} options={{ title: 'Online Booking'}}/>
         <Stack.Screen name="SymptomChecker" component={SCScreen} options={{ title: 'Symptom Checker'}}/>
         <Stack.Screen name="LogIn" component={LogInScreen} options={{ title: ''}}/>
+        <Stack.Screen name="SignUp" component={SignUpScreen} options={{ title: 'Sign In'}}/>
+        <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Profile'}}/>
+        {/* <Stack.Screen name="Identify" component={identifylogIn} options={{ title: 'identify'}}/> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
