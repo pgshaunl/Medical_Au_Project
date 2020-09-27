@@ -1,15 +1,15 @@
 import React from 'react';
-import {CheckBox, Image, Picker, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import HeaderScreen from './HeaderScreen';
-import LinearGradient from "react-native-linear-gradient";
-import {Input} from "react-native-elements";
+import CheckBox from '@react-native-community/checkbox';
+import {Picker} from '@react-native-community/picker';
 
 class QuestionsScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             language: null,
-            isSelected:false
+            Burning:false
         };
     }
 
@@ -23,7 +23,6 @@ class QuestionsScreen extends React.Component {
                         <Image style={styles.image} source={require('../img/icons/ic_question.jpg')} resizeMode={"center"}></Image>
                         <View style={styles.border}>
                             <Picker
-                                prompt={"dsdsd"}
                                 mode="dropdown"
                                 selectedValue={this.state.language}
                                 onValueChange={(lang) => this.setState({language: lang})}>
@@ -40,13 +39,21 @@ class QuestionsScreen extends React.Component {
                     <View style={{flexDirection:"row",width:"70%",marginLeft:1}}>
                         <View style={styles.checkboxContainer}>
                             <CheckBox
-                                value={this.state.isSelected}
+                                value={this.state.Burning}
+                                onValueChange={(value) =>
+                                    this.setState({
+                                        Burning : value
+                                })}
                             />
                             <Text style={styles.label}>Burning</Text>
                         </View>
                         <View style={styles.checkboxContainer}>
                             <CheckBox
-                                value={this.state.isSelected}
+                                value={this.state.Sudden}
+                                onValueChange={(value) =>
+                                    this.setState({
+                                        Sudden : value
+                                    })}
                             />
                             <Text style={styles.label}>Sudden</Text>
                         </View>
@@ -54,13 +61,21 @@ class QuestionsScreen extends React.Component {
                     <View style={{flexDirection:"row",width:"70%",marginLeft:1}}>
                         <View style={styles.checkboxContainer}>
                             <CheckBox
-                                value={this.state.isSelected}
+                                value={this.state.Ongoing}
+                                onValueChange={(value) =>
+                                    this.setState({
+                                        Ongoing : value
+                                    })}
                             />
                             <Text style={styles.label}>Ongoing</Text>
                         </View>
                         <View style={styles.checkboxContainer}>
                             <CheckBox
-                                value={this.state.isSelected}
+                                value={this.state.Crampy}
+                                onValueChange={(value) =>
+                                    this.setState({
+                                        Crampy : value
+                                    })}
                             />
                             <Text style={styles.label}>Crampy</Text>
                         </View>
@@ -68,19 +83,31 @@ class QuestionsScreen extends React.Component {
                     <Text style={styles.leftLabel}>Pain located in:</Text>
                     <View style={styles.checkboxContainer}>
                         <CheckBox
-                            value={this.state.isSelected}
+                            value={this.state.Middle}
+                            onValueChange={(value) =>
+                                this.setState({
+                                    Middle : value
+                                })}
                         />
                         <Text style={styles.label}>Middle adbomen</Text>
                     </View>
                     <View style={styles.checkboxContainer}>
                         <CheckBox
-                            value={this.state.isSelected}
+                            value={this.state.Low}
+                            onValueChange={(value) =>
+                                this.setState({
+                                    Low : value
+                                })}
                         />
                         <Text style={styles.label}>Low adbomen</Text>
                     </View>
                     <View style={styles.checkboxContainer}>
                         <CheckBox
-                            value={this.state.isSelected}
+                            value={this.state.Upper}
+                            onValueChange={(value) =>
+                                this.setState({
+                                    Upper : value
+                                })}
                         />
                         <Text style={styles.label}>Upper adbomen</Text>
                     </View>
@@ -90,25 +117,41 @@ class QuestionsScreen extends React.Component {
                     </View>
                     <View style={styles.checkboxContainer}>
                         <CheckBox
-                            value={this.state.isSelected}
+                            value={this.state.Watermelon}
+                            onValueChange={(value) =>
+                                this.setState({
+                                    Watermelon : value
+                                })}
                         />
                         <Text style={styles.label}>Watermelon</Text>
                     </View>
                     <View style={styles.checkboxContainer}>
                         <CheckBox
-                            value={this.state.isSelected}
+                            value={this.state.Ice}
+                            onValueChange={(value) =>
+                                this.setState({
+                                    Ice : value
+                                })}
                         />
                         <Text style={styles.label}>Ice-cream</Text>
                     </View>
                     <View style={styles.checkboxContainer}>
                         <CheckBox
-                            value={this.state.isSelected}
+                            value={this.state.Sea}
+                            onValueChange={(value) =>
+                                this.setState({
+                                    Sea : value
+                                })}
                         />
                         <Text style={styles.label}>Sea-food</Text>
                     </View>
                     <View style={styles.checkboxContainer}>
                         <CheckBox
-                            value={this.state.isSelected}
+                            value={this.state.Beer}
+                            onValueChange={(value) =>
+                                this.setState({
+                                    Beer : value
+                                })}
                         />
                         <Text style={styles.label}>Beer</Text>
                     </View>
@@ -160,7 +203,7 @@ const styles = StyleSheet.create({
         lineHeight:30,
     },
     border:{
-        width:"67%",
+        width:"75%",
         height: 40,
         borderWidth:1.5,
         borderRadius:16,
