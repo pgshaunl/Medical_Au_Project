@@ -28,6 +28,10 @@ import Search from './app/components/SearchHomeScreen';
 import HeaderScreen from './app/components/HeaderScreen';
 import CarouselScreen from './app/components/CarouselScreen';
 import { TouchableHighlight } from 'react-native-gesture-handler';
+import QuestionsScreen from "./app/components/QuestionsScreen";
+import ResultAdultScreen from "./app/components/ResultAdultScreen";
+import ResultChildScreen from "./app/components/ResultChildScreen";
+import QuestionsChildScreen from "./app/components/QuestionsChildScreen";
 
 
 
@@ -42,7 +46,7 @@ function HomeScreen({ navigation }) {
       <View style = {{flexDirection: 'row', justifyContent:"center"}}>
         <Search/>
       </View>
-      
+
       <View style={{margin:10}}>
       <CarouselScreen/>
       </View>
@@ -68,7 +72,7 @@ function HomeScreen({ navigation }) {
           <View style={styles.text}><Text>Online</Text><Text>Booking</Text></View>
         </View>
       </TouchableHighlight>
-      
+
       <TouchableHighlight onPress={() => navigation.navigate('SymptomChecker')} style = {styles.buttonContainer}>
         <View style={styles.button}>
           <Image
@@ -79,7 +83,7 @@ function HomeScreen({ navigation }) {
         </View>
       </TouchableHighlight>
       </View>
-      
+
       <View style={{flexDirection: 'row', justifyContent:"space-evenly",}}>
       <TouchableHighlight onPress={() => navigation.navigate('InstantTranslation')} style = {styles.buttonContainer}>
           <View style={styles.button}>
@@ -100,7 +104,7 @@ function HomeScreen({ navigation }) {
             <View style={styles.text}><Text>Emergency</Text><Text>Call</Text></View>
           </View>
         </TouchableHighlight>
-        
+
         <TouchableHighlight onPress={() => navigation.navigate('MedicalInsurance')} style = {styles.buttonContainer}>
           <View style={styles.button}>
             <Image
@@ -113,10 +117,10 @@ function HomeScreen({ navigation }) {
       </View>
     </View>
     </View>
-    
+
   );
 }
-  
+
 
 const Stack = createStackNavigator();
 
@@ -136,9 +140,9 @@ function App() {
           fontSize:30,
         },
       }}>
-        <Stack.Screen name="Home" component={HomeScreen} 
-        options={{ 
-          title: 'Medical_AU', 
+        <Stack.Screen name="Home" component={HomeScreen}
+        options={{
+          title: 'Medical_AU',
           }}/>
         <Stack.Screen name="EmergencyCall" component={ECScreen} options={{ title: 'Emergency Call'}}/>
         <Stack.Screen name="InstantTranslation" component={ITScreen} options={{ title: 'Instant Translation'}}/>
@@ -146,6 +150,10 @@ function App() {
         <Stack.Screen name="MedicalRecord" component={MRScreen} options={{ title: 'Medical Record'}}/>
         <Stack.Screen name="OnlineBooking" component={OBScreen} options={{ title: 'Online Booking'}}/>
         <Stack.Screen name="SymptomChecker" component={SCScreen} options={{ title: 'Symptom Checker'}}/>
+        <Stack.Screen name="Questions" component={QuestionsScreen} options={{ title: 'Questions'}}/>
+        <Stack.Screen name="QuestionsChild" component={QuestionsChildScreen} options={{ title: 'Questions'}}/>
+        <Stack.Screen name="ResultAdult" component={ResultAdultScreen} options={{ title: 'Result & Suggestions'}}/>
+        <Stack.Screen name="ResultChild" component={ResultChildScreen} options={{ title: 'Result & Suggestions'}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
