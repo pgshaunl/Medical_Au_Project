@@ -33,6 +33,7 @@ import QuestionsScreen from "./app/components/QuestionsScreen";
 import ResultAdultScreen from "./app/components/ResultAdultScreen";
 import ResultChildScreen from "./app/components/ResultChildScreen";
 import QuestionsChildScreen from "./app/components/QuestionsChildScreen";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
@@ -122,6 +123,22 @@ function HomeScreen({ navigation }) {
   );
 }
 
+function profileButton() {
+  return (
+
+    <View>
+      <TouchableHighlight onPress={() => alert("msss")} style = {styles.profileContainer}>
+          <View style={styles.profile}>
+          <Icon name="user-circle" color="grey" size={45}  />
+          </View>
+        </TouchableHighlight>
+    </View>
+
+
+
+  )
+  
+}
 
 const Stack = createStackNavigator();
 
@@ -144,12 +161,7 @@ function App() {
         <Stack.Screen name="Home" component={HomeScreen}
         options={{
           title: 'Medical_AU',
-          headerRight: () => (
-            <Button
-              onPress={() => alert('This is a button!')}
-              title="Info"
-              color="transparent"
-            />)
+          headerRight: profileButton,
           }}
           
           />
@@ -199,6 +211,22 @@ const styles = StyleSheet.create({
       resizeMode: "contain",
       height: 50,
       width: 50,
+    },
+    profileContainer: {
+      width: 45,
+      height: 45,
+      borderRadius: 100,
+      marginRight:30,
+    },
+
+    profile: {
+      flex: 1,
+      backgroundColor: "#fff",
+      width: 45,
+      height: 45,
+      borderRadius: 100,
+      justifyContent: "center",
+      alignItems:"center",
     },
   });
 
