@@ -56,27 +56,50 @@ export default class MIScreen extends Component {
             <Text style={styles.smallpoints}>. How do I purchase Overseas Visitors Cover with iSelect?</Text>
             <Text style={styles.smallpoints}>. Eligibility for Overseas Visitor Cover</Text>
             <Text style={styles.smallpoints}>. Renewing your Overseas Visitor Cover</Text>
-            <Text style={styles.smallpoints}>. HTravel within Australia</Text>
+            <Text style={styles.smallpoints}>. Travel within Australia</Text>
         </View>
-        <View
-          style={styles.slide}
-          title={<Text numberOfLines={1}>Big lie behind Nine’s new show</Text>}
-        >
-        </View>
-        <View
-          style={styles.slide}
-          title={<Text numberOfLines={1}>Why Stone split from Garfield</Text>}
-        >
         
-        </View>
         <View
-          style={styles.slide}
-          title={
-            <Text numberOfLines={1}>Learn from Kim K to land that job</Text>
-          }
-        >
-         
+          style={styles.slide}>
+
+            <Text style={styles.title} >How do I purchase Overseas Visitors Cover with iSelect?</Text>
+            <Text style={styles.text}>Buying Overseas Visitor Cover with iSelect is easy. You can buy your preferred policy in 4 easy steps.</Text>
+            <Text style={styles.text}>All we need is some basic personal information and an email address.</Text>
+            <Text style={styles.text}>Online payments are accepted via credit card. As soon as your purchase is complete, we will email you a visa letter confirming your health insurance details.</Text>
+            <Text style={styles.text}>It is best when buying your Overseas Visitors Cover to nominate the day you expect to arrive in Australia. If this date changes due to delays you can amend the start date once you have arrived by contacting the health fund.</Text>
+            <Text style={styles.text}>The fund will require proof of your arrival date/ use of your aircraft boarding pass.</Text>
         </View>
+
+        <View
+          style={styles.slide}>
+           <Text style={styles.title} >Eligibility for Overseas Visitor Cover</Text>
+           <Text style={styles.text}>Before you begin the process of buying Overseas Visitors Cover, you should confirm whether you’re eligible. If your cover is for visa purposes, check your visa requirements.</Text>
+        </View>
+
+        <View
+          style={styles.slide}>
+           <Text style={styles.title} >Renewing your Overseas Visitor Cover</Text>
+           <Text style={styles.text}>You can renew your lapsed cover by contacting your health fund provider.</Text>
+        </View>
+
+        <View
+          style={styles.slide}>
+           <Text style={styles.title}>Travel within Australia</Text>
+           <Text style={styles.text}>If you have Overseas Visitors Cover and you’re planning to travel interstate, health funds will cover their members across all states and territories.</Text>
+           <Text style={styles.text}>If you will be travelling overseas whilst visiting Australia, your Overseas Visitor Cover will not cover you once you have left Australia. We recommend that you take out a travel insurance policy this will cover you for health care services whilst on your trip.</Text>
+        </View>
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
       </Swiper>
      
       </View>
