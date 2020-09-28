@@ -14,6 +14,7 @@ import {
   View,
   Text,
   Image,
+  Button,
 } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import { NavigationContainer } from '@react-navigation/native';
@@ -143,7 +144,15 @@ function App() {
         <Stack.Screen name="Home" component={HomeScreen}
         options={{
           title: 'Medical_AU',
-          }}/>
+          headerRight: () => (
+            <Button
+              onPress={() => alert('This is a button!')}
+              title="Info"
+              color="transparent"
+            />)
+          }}
+          
+          />
         <Stack.Screen name="EmergencyCall" component={ECScreen} options={{ title: 'Emergency Call'}}/>
         <Stack.Screen name="InstantTranslation" component={ITScreen} options={{ title: 'Instant Translation'}}/>
         <Stack.Screen name="MedicalInsurance" component={MIScreen} options={{ title: 'Medical Insurance'}}/>

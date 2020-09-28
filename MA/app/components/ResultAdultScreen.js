@@ -1,8 +1,7 @@
 import React from 'react';
-import {CheckBox, Image, Picker, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import HeaderScreen from './HeaderScreen';
 import LinearGradient from "react-native-linear-gradient";
-import {Input} from "react-native-elements";
 
 class ResultAdultScreen extends React.Component {
 
