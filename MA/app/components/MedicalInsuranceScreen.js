@@ -88,19 +88,7 @@ export default class MIScreen extends Component {
            <Text style={styles.text}>If you have Overseas Visitors Cover and you’re planning to travel interstate, health funds will cover their members across all states and territories.</Text>
            <Text style={styles.text}>If you will be travelling overseas whilst visiting Australia, your Overseas Visitor Cover will not cover you once you have left Australia. We recommend that you take out a travel insurance policy this will cover you for health care services whilst on your trip.</Text>
         </View>
-
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-      </Swiper>
+        </Swiper>
      
       </View>
     );
