@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Linking } from 'react-native';
 import HeaderScreen from './HeaderScreen';
+import LinearGradient from "react-native-linear-gradient";
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 
@@ -23,7 +25,8 @@ class ECScreen extends React.Component {
   render() {
     return (
       <View>
-        <HeaderScreen></HeaderScreen>
+        <HeaderScreen/>
+        <View style={{padding:5, paddingTop:0}}>
         <Text style={styles.baseText}>
         <Text style={styles.titleText} onPress={this.onPressTitle}>
           {this.state.titleText1}
@@ -67,6 +70,33 @@ class ECScreen extends React.Component {
         </Text>
         </Text>
         </Text>
+
+        <View style={{ alignItems:"center",
+                        justifyContent:"center"}}>
+                        <TouchableOpacity 
+                                          onPress={()=>{
+                                            Linking.openURL(`tel:${`000`}`)
+                                          }}>
+                            <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}}
+                                            colors={['#2b78d4', '#46bbab']}
+                                            style={{
+                                                padding:5,
+                                                marginTop:20,
+                                                borderRadius:8,
+                                                width:200,
+
+                                            }}>
+                                <Text style={styles.imgText}>Call it</Text>
+
+                            </LinearGradient>
+                        </TouchableOpacity>
+
+                    </View>
+        </View>
+        
+                    
+      
+      
         
       </View>
     );
@@ -90,8 +120,15 @@ const styles = StyleSheet.create({
       fontSize: 16,
       fontWeight: "bold",
       
-    }
+    },
+    imgText: {
+      textAlign:"center",
+      fontSize:20,
+      color: "white",
+  },
   });
+
+
 
 
 export default ECScreen;
