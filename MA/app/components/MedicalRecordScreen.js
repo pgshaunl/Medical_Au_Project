@@ -41,7 +41,7 @@ class MRScreen extends React.Component {
 
       <View style = {{flexDirection:"row", alignItems:"center",  height:150, borderBottomColor:"black", borderBottomWidth:1} }>
       <View style={{ margin:10}}>
-      <TouchableHighlight onPress={() => alert("msss")} style = {styles.profileContainer}>
+      <TouchableHighlight onPress={() => this.props.navigation.navigate('Profile')} style = {styles.profileContainer}>
           <View style={styles.profile}>
           <Icon name="user-circle" color="grey" size={98}  />
           </View>

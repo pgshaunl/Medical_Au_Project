@@ -34,6 +34,7 @@ import ResultChildScreen from "./app/components/ResultChildScreen";
 import QuestionsChildScreen from "./app/components/QuestionsChildScreen";
 import HLScreen from "./app/components/HospitalListScreen";
 import DLScreen from "./app/components/DoctorListScreen";
+import ProfileScreen from './app/components/ProfileScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
@@ -124,23 +125,6 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function profileButton() {
-  return (
-
-    <View>
-      <TouchableHighlight onPress={() => alert("msss")} style = {styles.profileContainer}>
-          <View style={styles.profile}>
-          <Icon name="user-circle" color="grey" size={45}  />
-          </View>
-        </TouchableHighlight>
-    </View>
-
-
-
-  )
-  
-}
-
 const Stack = createStackNavigator();
 
 function App() {
@@ -160,24 +144,106 @@ function App() {
         },
       }}>
         <Stack.Screen name="Home" component={HomeScreen}
-        options={{
-          title: 'Medical_AU',
-          headerRight: profileButton,
-          }}
-          
-          />
-        <Stack.Screen name="EmergencyCall" component={ECScreen} options={{ title: 'Emergency Call'}}/>
-        <Stack.Screen name="InstantTranslation" component={ITScreen} options={{ title: 'Instant Translation'}}/>
-        <Stack.Screen name="MedicalInsurance" component={MIScreen} options={{ title: 'Medical Insurance'}}/>
-        <Stack.Screen name="MedicalRecord" component={MRScreen} options={{ title: 'Medical Record'}}/>
-        <Stack.Screen name="OnlineBooking" component={OBScreen} options={{ title: 'Online Booking'}}/>
-        <Stack.Screen name="HospitalList" component={HLScreen} options={{ title: 'Hospital List'}}/>
-        <Stack.Screen name="DoctorList" component={DLScreen} options={{ title: 'Doctor List'}}/>
-        <Stack.Screen name="SymptomChecker" component={SCScreen} options={{ title: 'Symptom Checker'}}/>
-        <Stack.Screen name="Questions" component={QuestionsScreen} options={{ title: 'Questions'}}/>
-        <Stack.Screen name="QuestionsChild" component={QuestionsChildScreen} options={{ title: 'Questions'}}/>
-        <Stack.Screen name="ResultAdult" component={ResultAdultScreen} options={{ title: 'Result & Suggestions'}}/>
-        <Stack.Screen name="ResultChild" component={ResultChildScreen} options={{ title: 'Result & Suggestions'}}/>
+        options={({navigation}) => ({ title: 'Medical_AU', headerRight: ()=>(
+          <Icon name="user"
+                onPress={() => navigation.navigate("Profile")}
+                size={30} color="white" style={{marginRight:20}}/>
+       )   
+       
+       })}/>
+        <Stack.Screen name="EmergencyCall" component={ECScreen} options={({navigation}) => ({ title: 'Emergency Call', headerRight: ()=>(
+          <Icon name="home"
+                onPress={() => navigation.navigate("Home")}
+                size={30} color="white" style={{marginRight:20}}/>
+       )   
+       
+       })}/>
+        <Stack.Screen name="InstantTranslation" component={ITScreen} options={({navigation}) => ({ title: 'Instant Translation', headerRight: ()=>(
+          <Icon name="home"
+                onPress={() => navigation.navigate("Home")}
+                size={30} color="white" style={{marginRight:20}}/>
+       )   
+       
+       })}/>
+        <Stack.Screen name="MedicalInsurance" component={MIScreen} options={({navigation}) => ({ title: 'Medical Insurance', headerRight: ()=>(
+          <Icon name="home"
+                onPress={() => navigation.navigate("Home")}
+                size={30} color="white" style={{marginRight:20}}/>
+       )   
+       
+       })}/>
+        <Stack.Screen name="MedicalRecord" component={MRScreen} options={({navigation}) => ({ title: 'Medical Record', headerRight: ()=>(
+          <Icon name="home"
+                onPress={() => navigation.navigate("Home")}
+                size={30} color="white" style={{marginRight:20}}/>
+       )   
+       
+       })}/>
+        <Stack.Screen name="OnlineBooking" component={OBScreen} options={({navigation}) => ({ title: 'Online Booking', headerRight: ()=>(
+          <Icon name="home"
+                onPress={() => navigation.navigate("Home")}
+                size={30} color="white" style={{marginRight:20}}/>
+       )   
+       
+       })}/>
+        <Stack.Screen name="HospitalList" component={HLScreen} options={({navigation}) => ({ title: 'Online Booking', headerRight: ()=>(
+          <Icon name="home"
+                onPress={() => navigation.navigate("Home")}
+                size={30} color="white" style={{marginRight:20}}/>
+       )   
+       
+       })}/>
+        <Stack.Screen name="DoctorList" component={DLScreen} options={({navigation}) => ({ title: 'Doctor List', headerRight: ()=>(
+          <Icon name="home"
+                onPress={() => navigation.navigate("Home")}
+                size={30} color="white" style={{marginRight:20}}/>
+       )   
+       
+       })}/>
+        <Stack.Screen name="SymptomChecker" component={SCScreen} options={({navigation}) => ({ title: 'Symptom Checker', headerRight: ()=>(
+          <Icon name="home"
+                onPress={() => navigation.navigate("Home")}
+                size={30} color="white" style={{marginRight:20}}/>
+       )   
+       
+       })}/>
+        <Stack.Screen name="Questions" component={QuestionsScreen} options={({navigation}) => ({ title: 'Symptom Checker', headerRight: ()=>(
+          <Icon name="home"
+                onPress={() => navigation.navigate("Home")}
+                size={30} color="white" style={{marginRight:20}}/>
+       )   
+       
+       })}/>
+        <Stack.Screen name="QuestionsChild" component={QuestionsChildScreen} options={({navigation}) => ({ title: 'Symptom Checker', headerRight: ()=>(
+          <Icon name="home"
+                onPress={() => navigation.navigate("Home")}
+                size={30} color="white" style={{marginRight:20}}/>
+       )   
+       
+       })}/>
+        <Stack.Screen name="ResultAdult" component={ResultAdultScreen} options={({navigation}) => ({ title: 'Symptom Checker', headerRight: ()=>(
+          <Icon name="home"
+                onPress={() => navigation.navigate("Home")}
+                size={30} color="white" style={{marginRight:20}}/>
+       )   
+       
+       })}/>
+        <Stack.Screen name="ResultChild" component={ResultChildScreen} options={({navigation}) => ({ title: 'Symptom Checker', headerRight: ()=>(
+          <Icon name="home"
+                onPress={() => navigation.navigate("Home")}
+                size={30} color="white" style={{marginRight:20}}/>
+       )   
+       
+       })}/>
+
+       <Stack.Screen name="Profile" component={ProfileScreen} options={({navigation}) => ({ title: 'Profile', headerRight: ()=>(
+          <Icon name="home"
+                onPress={() => navigation.navigate("Home")}
+                size={30} color="white" style={{marginRight:20}}/>
+       )   
+       
+       })}/>
+
       </Stack.Navigator>
     </NavigationContainer>
   );
