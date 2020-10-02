@@ -76,18 +76,19 @@ class DLScreen extends React.Component {
   
   state = {
     modalVisible: false,
-    doctor: null
+    doctor: "111",
   };
 
   setModalVisible = (visible) => {
     this.setState({ modalVisible: visible });
   }
 
-  setDoctor = (doctor) => {
-    this,this.setState({ doctor: doctor});
+  setDoctor = (name) => {
+    this.setState({ doctor: name});
   }
   render() {
     const { modalVisible } = this.state;
+    const { doctor } = this.state;
     
     return (
       <View>
@@ -96,7 +97,7 @@ class DLScreen extends React.Component {
           <ScrollView>
         {
           list.map((l, i) => (
-            <ListItem key={i} bottomDivider onPress={() => {this.setModalVisible(true);}}>
+            <ListItem key={i} bottomDivider onPress={() => {this.setModalVisible(true); this.setDoctor(l.name);}}>
               <Avatar source={{uri: l.avatar_url}} />
               <ListItem.Content>
                 <ListItem.Title>{l.name}</ListItem.Title>
@@ -116,8 +117,8 @@ class DLScreen extends React.Component {
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              
-              <Text style={styles.modalText}>Hello World!</Text>
+
+              <Text style={styles.modalText}>{doctor}</Text>
 
               <TouchableHighlight
                 style={{ ...styles.modalButton, backgroundColor: "#2196F3" }}
