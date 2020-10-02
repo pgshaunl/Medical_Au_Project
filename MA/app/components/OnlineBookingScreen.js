@@ -6,7 +6,7 @@ import {Picker} from '@react-native-community/picker';
 import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
 import LinearGradient from "react-native-linear-gradient";
-import { TouchableHighlight } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class OBScreen extends React.Component {
   constructor(props) {
@@ -35,6 +35,7 @@ class OBScreen extends React.Component {
         <Text style={styles.header} >Step 1</Text>
         <View style={styles.pickerContainer} >
         <View style={styles.icon} ><Icon name="map" color="grey" size={25}  /></View>
+        
         <View>
           <TextInput style = {styles.input}
                underlineColorAndroid = "transparent"
@@ -78,23 +79,32 @@ class OBScreen extends React.Component {
 
       </View>
 
-      <View
-      style={{ alignItems:"center",
-      justifyContent:"center"}}>
-      <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                      colors={['#2b78d4', '#46bbab']}
-                      style={{
-                          padding:12,
-                          marginTop:20,
-                          borderRadius:8,
-                          width:200,
-                      }}>
-        
-          <Text style={styles.imgText}>Search</Text>
+      <View style={{ alignItems:"center",
+                        justifyContent:"center"}}>
+                        <TouchableOpacity 
+                                          onPress={()=>{
+                                              this.props.navigation.navigate('HospitalList')
+                                          }}>
+                            <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}}
+                                            colors={['#2b78d4', '#46bbab']}
+                                            style={{
+                                                padding:12,
+                                                marginTop:20,
+                                                borderRadius:8,
+                                                width:200,
 
-      </LinearGradient>
+                                            }}>
+                                <Text style={styles.imgText}>Search</Text>
+
+                            </LinearGradient>
+                        </TouchableOpacity>
+
+                    </View>
+                    
       </View>
-      </View>
+      
+      
+      
     );
   }
 }
