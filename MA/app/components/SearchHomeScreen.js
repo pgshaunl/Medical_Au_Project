@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 
 
@@ -19,7 +20,8 @@ class Search extends React.Component {
     const { search } = this.state;
 
     return (
-        <SearchBar
+        <View style={{marginTop: 10}}>
+          <SearchBar
         platform={"android"}
         placeholder="Search Hospital..."
         onChangeText={this.updateSearch}
@@ -27,6 +29,8 @@ class Search extends React.Component {
         containerStyle={{width:350, borderRadius:10,
           margin:10}}
       />
+        </View>
+        
       
       
     );

@@ -1,7 +1,8 @@
 import React from 'react';
 import HeaderScreen from './HeaderScreen';
-import { StyleSheet, Text, View, ScrollView, FlatList} from 'react-native';
-import { ListItem, Avatar } from 'react-native-elements'
+import { StyleSheet, Text, View, ScrollView, TouchableHighlight} from 'react-native';
+import { ListItem, Avatar } from 'react-native-elements';
+import Modal from 'react-native-modal';
 
 const list = [
     {
@@ -69,33 +70,67 @@ const list = [
 
   
 
-class DLScreen extends React.Component {
-    keyExtractor = (item, index) => index.toString()
 
-        renderItem = ({ item }) => (
-            <ScrollView  >
-            <ListItem bottomDivider>
-            <Avatar source={{uri: item.avatar_url}} />
-            <ListItem.Content>
-            <ListItem.Title>{item.name}</ListItem.Title>
-            <ListItem.Subtitle>{item.subtitle}</ListItem.Subtitle>
-            </ListItem.Content>
-            <ListItem.Chevron />
-            </ListItem>
-            </ScrollView>
-        
-        )
+class DLScreen extends React.Component {
+    
+  
+  state = {
+    modalVisible: false,
+    doctor: null
+  };
+
+  setModalVisible = (visible) => {
+    this.setState({ modalVisible: visible });
+  }
+
+  setDoctor = (doctor) => {
+    this,this.setState({ doctor: doctor});
+  }
   render() {
+    const { modalVisible } = this.state;
+    
     return (
-      <View style={{height: 700}}>
+      <View>
           <HeaderScreen/>
-        <View style>
-        <FlatList
-      keyExtractor={this.keyExtractor}
-      data={list}
-      renderItem={this.renderItem}
-        />
-        </View>
+          <View>
+          <ScrollView>
+        {
+          list.map((l, i) => (
+            <ListItem key={i} bottomDivider onPress={() => {this.setModalVisible(true);}}>
+              <Avatar source={{uri: l.avatar_url}} />
+              <ListItem.Content>
+                <ListItem.Title>{l.name}</ListItem.Title>
+                <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
+              </ListItem.Content>
+            </ListItem>
+          ))
+        }
+      </ScrollView>
+          </View>
+          
+
+        <View style={styles.centeredView}>
+        <Modal
+          animationType="slide"
+          isVisible={modalVisible}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              
+              <Text style={styles.modalText}>Hello World!</Text>
+
+              <TouchableHighlight
+                style={{ ...styles.modalButton, backgroundColor: "#2196F3" }}
+                onPress={() => {
+                  this.setModalVisible(!modalVisible);
+                }}
+              >
+                <Text style={styles.textStyle}>Hide Modal</Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+        </Modal>
+      </View>
        
         
       </View>
@@ -112,6 +147,43 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    centeredView: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      marginTop: 22
+    },
+    modalView: {
+      margin: 20,
+      backgroundColor: "white",
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5
+    },
+    modalButton: {
+      backgroundColor: "#F194FF",
+      borderRadius: 20,
+      padding: 10,
+      elevation: 2
+    },
+    textStyle: {
+      color: "white",
+      fontWeight: "bold",
+      textAlign: "center"
+    },
+    modalText: {
+      marginBottom: 15,
+      textAlign: "center"
+    }
   });
 
+  
 export default DLScreen;

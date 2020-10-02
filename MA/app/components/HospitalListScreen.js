@@ -49,6 +49,16 @@ const list = [
     avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
     address: '1/140, melbonest, South Brisbane, QLD, 4001, Australia'
   },
+  {
+    name: 'Southbank Day Hospital',
+    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+    address: '1/140, melbonest, South Brisbane, QLD, 4001, Australia'
+  },
+  {
+    name: 'Southbank Day Hospital',
+    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+    address: '1/140, melbonest, South Brisbane, QLD, 4001, Australia'
+  },
 ]
 
 
@@ -58,7 +68,7 @@ class HLScreen extends React.Component {
     return (
       <View>
           <HeaderScreen/>
-          <View style={{height: 700}}>
+          <View>
           <ScrollView>
         {
         list.map((l, i) => (
