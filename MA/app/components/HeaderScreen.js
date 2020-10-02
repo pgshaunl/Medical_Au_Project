@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 class HeaderScreen extends React.Component {
   render() {
     return (
-      <View style={{height:100, marginBottom: 10,}}>
+      <View style={{height:100,}}>
         <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
         colors={['#2b78d4', '#46bbab']} 
         style={{flex: 1,
