@@ -34,18 +34,24 @@ class ResultChildScreen extends React.Component {
                     <Text style={styles.hitText}>Do you need an online booking?</Text>
                     <View style={{ alignItems:"center",
                         justifyContent:"center"}}>
-                        <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                                        colors={['#2b78d4', '#46bbab']}
-                                        style={{
-                                            padding:12,
-                                            marginTop:20,
-                                            borderRadius:8,
-                                            width:200,
+                        <TouchableOpacity style={styles.rowItem}
+                                          onPress={()=>{
+                                              this.props.navigation.navigate('OnlineBooking')
+                                          }}>
+                            <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}}
+                                            colors={['#2b78d4', '#46bbab']}
+                                            style={{
+                                                padding:12,
+                                                marginTop:20,
+                                                borderRadius:8,
+                                                width:200,
 
-                                        }}>
-                            <Text style={styles.imgText}>Online booking</Text>
+                                            }}>
+                                <Text style={styles.imgText}>Online booking</Text>
 
-                        </LinearGradient>
+                            </LinearGradient>
+                        </TouchableOpacity>
+
                     </View>
 
                 </ScrollView>

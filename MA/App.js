@@ -14,7 +14,6 @@ import {
   View,
   Text,
   Image,
-  Button,
 } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import { NavigationContainer } from '@react-navigation/native';
@@ -33,6 +32,8 @@ import QuestionsScreen from "./app/components/QuestionsScreen";
 import ResultAdultScreen from "./app/components/ResultAdultScreen";
 import ResultChildScreen from "./app/components/ResultChildScreen";
 import QuestionsChildScreen from "./app/components/QuestionsChildScreen";
+import HLScreen from "./app/components/HospitalListScreen";
+import DLScreen from "./app/components/DoctorListScreen";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
@@ -170,6 +171,8 @@ function App() {
         <Stack.Screen name="MedicalInsurance" component={MIScreen} options={{ title: 'Medical Insurance'}}/>
         <Stack.Screen name="MedicalRecord" component={MRScreen} options={{ title: 'Medical Record'}}/>
         <Stack.Screen name="OnlineBooking" component={OBScreen} options={{ title: 'Online Booking'}}/>
+        <Stack.Screen name="HospitalList" component={HLScreen} options={{ title: 'Hospital List'}}/>
+        <Stack.Screen name="DoctorList" component={DLScreen} options={{ title: 'Doctor List'}}/>
         <Stack.Screen name="SymptomChecker" component={SCScreen} options={{ title: 'Symptom Checker'}}/>
         <Stack.Screen name="Questions" component={QuestionsScreen} options={{ title: 'Questions'}}/>
         <Stack.Screen name="QuestionsChild" component={QuestionsChildScreen} options={{ title: 'Questions'}}/>
