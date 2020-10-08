@@ -35,6 +35,7 @@ import QuestionsChildScreen from "./app/components/QuestionsChildScreen";
 import HLScreen from "./app/components/HospitalListScreen";
 import DLScreen from "./app/components/DoctorListScreen";
 import ProfileScreen from './app/components/ProfileScreen';
+import TimeScreen from './app/components/TimeScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
@@ -237,6 +238,14 @@ function App() {
        })}/>
 
        <Stack.Screen name="Profile" component={ProfileScreen} options={({navigation}) => ({ title: 'Profile', headerRight: ()=>(
+          <Icon name="home"
+                onPress={() => navigation.navigate("Home")}
+                size={30} color="white" style={{marginRight:20}}/>
+       )   
+       
+       })}/>
+
+<Stack.Screen name="Time" component={TimeScreen} options={({navigation}) => ({ title: 'Time', headerRight: ()=>(
           <Icon name="home"
                 onPress={() => navigation.navigate("Home")}
                 size={30} color="white" style={{marginRight:20}}/>
