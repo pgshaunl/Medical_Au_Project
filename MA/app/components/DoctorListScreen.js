@@ -3,6 +3,7 @@ import HeaderScreen from './HeaderScreen';
 import { StyleSheet, Text, View, ScrollView, TouchableHighlight} from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
 import Modal from 'react-native-modal';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const list = [
     {
@@ -116,19 +117,32 @@ class DLScreen extends React.Component {
           isVisible={modalVisible}
         >
           <View style={styles.centeredView}>
+          
             <View style={styles.modalView}>
+            
+            
 
               <Text style={styles.modalText}>{doctor}</Text>
-
+              
               <TouchableHighlight
                 style={{ ...styles.modalButton, backgroundColor: "#2196F3" }}
-                onPress={() => {
+                onPress={()=>{
                   this.setModalVisible(!modalVisible);
-                }}
+                  this.props.navigation.navigate('Time');
+              }}
               >
-                <Text style={styles.textStyle}>Hide Modal</Text>
+                <Text style={styles.textStyle}>Book</Text>
               </TouchableHighlight>
             </View>
+            <View style={{flexDirection:"row", alignItems:"center", justifyContent:"center", height:10}}>
+            <Icon name="close"
+                onPress={() => {
+                  this.setModalVisible(!modalVisible);}}
+                size={17} color="white" style={{}}/>
+                <Text onPress={() => {
+                  this.setModalVisible(!modalVisible);}} style={{color:'white', fontSize:17, marginLeft:3}} >close</Text>
+            </View>
+           
           </View>
         </Modal>
       </View>
@@ -171,7 +185,7 @@ const styles = StyleSheet.create({
     },
     modalButton: {
       backgroundColor: "#F194FF",
-      borderRadius: 20,
+      borderRadius: 10,
       padding: 10,
       elevation: 2
     },
