@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "364878746767",
+    "firebase_url": "https://medicalau-712ae.firebaseio.com",
+    "project_id": "medicalau-712ae",
+    "storage_bucket": "medicalau-712ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364878746767:android:2dd0cc46e8537eb5540cfa",
+        "android_client_info": {
+          "package_name": "com.ma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "364878746767-7cjpdi5bdnkqjse0el5gfg68k2q57b05.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ma",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "364878746767-4e41qv9fu58tkj5br0fc4gmf0sjkitjt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLPrCOmHMDigzVeNeyn-lniJUvgKipt2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "364878746767-4e41qv9fu58tkj5br0fc4gmf0sjkitjt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
