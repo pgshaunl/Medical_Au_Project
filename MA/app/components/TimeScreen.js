@@ -5,10 +5,15 @@ import LinearGradient from "react-native-linear-gradient";
 
 
 class TimeScreen extends React.Component {
+    constructor(props) {
+        super(props)
+    }
     render() {
+        const { hospital } = this.props.route.params;
         return (
             <View>
                 <HeaderScreen/>
+        <Text>Hospital: {hospital}</Text>
             </View>
         );
     }
