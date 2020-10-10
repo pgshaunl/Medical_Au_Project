@@ -9,63 +9,59 @@ const list = [
     {
       name: 'Amy Farha',
       avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-      subtitle: 'Vice President'
+      subtitle: 'General Practioner',
+      work_day: [1,3,4],
+      hospital: 'Southbank Day Hospital',
+      gender: 'Female',
+      language: 'English'
     },
     {
       name: 'Chris Jackson',
       avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-      subtitle: 'Vice Chairman'
+      subtitle: 'General Practioner',
+      work_day: [2,5,6],
+      hospital: 'Southbank Day Hospital',
+      gender: 'Male',
+      language: 'Chinese, English'
     },
     {
-        name: 'Chris Jackson',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'Vice Chairman'
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'Vice Chairman'
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'Vice Chairman'
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'Vice Chairman'
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'Vice Chairman'
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'Vice Chairman'
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'Vice Chairman'
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'Vice Chairman'
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'Vice Chairman'
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'Vice Chairman'
-      },
+      name: 'Emma Watson',
+      avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+      subtitle: 'General Practioner',
+      work_day: [0,3,6],
+      hospital: 'Toowong Hospital',
+      gender: 'Female',
+      language: 'English'
+
+    },
+    {
+      name: 'James Bond',
+      avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+      subtitle: 'General Practioner',
+      work_day: [1,5],
+      hospital: 'AKA Hospital',
+      gender: 'Male',
+      language: 'English'
+    },
+
+    {
+      name: 'Yushiko',
+      avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+      subtitle: 'General Practioner',
+      work_day: [0,1,3,4,5],
+      hospital: 'Southbank Day Hospital',
+      gender: 'Female',
+      language: 'Japanese'
+    },
+    {
+      name: 'LI',
+      avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+      subtitle: 'General Practioner',
+      work_day: [2,5,6],
+      hospital: 'Southbank Day Hospital',
+      gender: 'Male',
+      language: 'Chinese, English'
+    },
     
   ]
 
@@ -73,11 +69,16 @@ const list = [
 
 
 class DLScreen extends React.Component {
-    
+    constructor(props) {
+      super(props);
+    }
   
   state = {
     modalVisible: false,
     doctor: "111",
+    isAvailable: false,
+    gender: null,
+    language: null,
   };
 
   setModalVisible = (visible) => {
@@ -87,30 +88,51 @@ class DLScreen extends React.Component {
   setDoctor = (name) => {
     this.setState({ doctor: name});
   }
+
+  setAvailable = (available) => {
+    this.setState({ isAvailable: available});
+  }
+  
+  setGender = (gender) => {
+    this.setState({gender:gender});
+  }
+
+  setLanguage = (language) => {
+    this.setState({language: language})
+  }
+
   render() {
-    const { modalVisible } = this.state;
-    const { doctor } = this.state;
-    
+    const { modalVisible, doctor, isAvailable, gender, language } = this.state;
+    const { weekDay, date, hospital } = this.props.route.params;
+
     return (
       <View>
           <HeaderScreen/>
+          <Text>{hospital}</Text>
+          <Text>{weekDay}</Text>
+          <Text>{date}</Text>
           <View>
           <ScrollView>
         {
           list.map((l, i) => (
-            <ListItem key={i} bottomDivider onPress={() => {this.setModalVisible(true); this.setDoctor(l.name);}}>
+            hospital === l.hospital ? 
+             <ListItem key={i} bottomDivider onPress={() => 
+              {this.setAvailable(l.work_day.includes(weekDay));
+                this.setGender(l.gender);
+                this.setLanguage(l.language);
+              this.setModalVisible(true); this.setDoctor(l.name);}} >
               <Avatar source={{uri: l.avatar_url}} />
               <ListItem.Content>
-                <ListItem.Title>{l.name}</ListItem.Title>
-                <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
+                <ListItem.Title style={{fontSize:21}} >{l.name}</ListItem.Title>
+                <ListItem.Subtitle style={{fontSize:17}} >{l.subtitle}</ListItem.Subtitle>
+                <View>{l.work_day.includes(weekDay) ? <Text style={{color:"green"}}>Available</Text> :<Text style={{color:"red"}}>Unavailable</Text>}</View>
               </ListItem.Content>
-            </ListItem>
+            </ListItem> : <View key={i}/>
+            
           ))
         }
       </ScrollView>
           </View>
-          
-
         <View style={styles.centeredView}>
         <Modal
           animationType="slide"
@@ -119,16 +141,19 @@ class DLScreen extends React.Component {
           <View style={styles.centeredView}>
           
             <View style={styles.modalView}>
-            
-            
 
               <Text style={styles.modalText}>{doctor}</Text>
-              
+              <Text>Gender: {gender}</Text>
+              <Text>Language: {language}</Text>
               <TouchableHighlight
-                style={{ ...styles.modalButton, backgroundColor: "#2196F3" }}
+                style={{ ...styles.modalButton, backgroundColor: isAvailable? "#2196F3":"grey" }}
                 onPress={()=>{
-                  this.setModalVisible(!modalVisible);
-                  this.props.navigation.navigate('Time');
+                  if(isAvailable === true) {
+                    this.setModalVisible(!modalVisible);
+                  } else {
+                    alert("Sorry, this GP cannot be booked today");
+                  }
+                  
               }}
               >
                 <Text style={styles.textStyle}>Book</Text>
@@ -184,7 +209,7 @@ const styles = StyleSheet.create({
       elevation: 5
     },
     modalButton: {
-      backgroundColor: "#F194FF",
+      backgroundColor: "#2196F3" ,
       borderRadius: 10,
       padding: 10,
       elevation: 2
@@ -196,7 +221,8 @@ const styles = StyleSheet.create({
     },
     modalText: {
       marginBottom: 15,
-      textAlign: "center"
+      textAlign: "center",
+      fontSize: 20,
     }
   });
 
