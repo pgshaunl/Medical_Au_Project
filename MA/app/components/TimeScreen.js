@@ -1,23 +1,63 @@
-import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, { useState } from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View, Button} from 'react-native';
 import HeaderScreen from './HeaderScreen';
-import LinearGradient from "react-native-linear-gradient";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 
-class TimeScreen extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-    render() {
-        const { hospital } = this.props.route.params;
-        return (
-            <View>
-                <HeaderScreen/>
-        <Text>Hospital: {hospital}</Text>
-            </View>
-        );
-    }
-}
+
+
+const TimeScreen = (props) => {
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [dateDisplay, setDate] = useState(new Date());
+    const [weekDay, setWeekday] = useState(dateDisplay.getDay());
+    const { hospital } = props.route.params;
+
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+
+    const handleConfirm = (date) => {
+        console.warn("A date has been picked: ", date);
+        setDate(date);
+        setWeekday(date.getDay())
+        hideDatePicker();
+    };
+
+    function getDate() {
+        var date = dateDisplay;
+
+        var year = date.getFullYear().toString();
+        var month = (date.getMonth()+1).toString();
+        var day = date.getDate().toString();
+        var hour =  date.getHours().toString();
+        var minute = date.getMinutes().toString();
+        var weekday = weekDay.toString();
+
+        return day+'/'+month+'/'+year +' 星期'+ weekday + ' '+hour+':'+(date.getMinutes()<10?'0':'') + minute;
+        };
+
+  return (
+    <View>
+      <HeaderScreen/>
+      <Button title="Show Date Picker" onPress={showDatePicker} />
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
+      />
+      <Text>{getDate()}</Text>
+      <Text>Hospital: {hospital}</Text>
+      <Button title="Doctor List" onPress={()=>{
+                                              props.navigation.navigate('DoctorList', {weekDay: weekDay, date: dateDisplay.toDateString(), hospital: hospital});
+                                          }}></Button>
+    </View>
+  );
+  };
 
 const styles = StyleSheet.create({
     hitText: {
