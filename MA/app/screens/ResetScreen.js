@@ -5,27 +5,23 @@ import FormInput from '../components/FormInput';
 import { AuthContext } from '../navigation/AuthProvider';
 import Header from '../components/Header';
 
-export default function SignupScreen() {
+export default function ResetScreen() {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const { register } = useContext(AuthContext);
+  const { reset } = useContext(AuthContext);
   const condition = () => {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (password.length < 8) {
-      alert("Sorry, the password has to be at least 8 characters")
-    } else if (!re.test(String(email).toLowerCase()) ) { 
+    if (!re.test(String(email).toLowerCase()) ) { 
       alert("Sorry, the email address is not valid")
     } else {
-      register(email, password);
+      reset(email);
     }
   }
 
   return (
-    
-      <View style={styles.container}>
+    <View style={styles.container}>
       <Header/>
       <View style={styles.InputContainer}>
-      <Text style={styles.text}>Create an account</Text>
+      <Text style={styles.text}>Input your Email</Text>
       <FormInput
         value={email}
         placeholderText='Email'
@@ -34,20 +30,13 @@ export default function SignupScreen() {
         keyboardType='email-address'
         autoCorrect={false}
       />
-      <FormInput
-        value={password} 
-        placeholderText='Password'
-        onChangeText={userPassword => setPassword(userPassword)}
-        secureTextEntry={true}
-      />
       <FormButton
-        buttonTitle='Signup'
+        buttonTitle='Reset'
         onPress={condition}
       />
       </View>
      
     </View>
-    
   
   );
 }

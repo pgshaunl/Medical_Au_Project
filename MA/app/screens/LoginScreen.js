@@ -43,6 +43,12 @@ export default function LoginScreen({ navigation }) {
       >
         <Text style={styles.navButtonText}>New user? Join here</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.navButton}
+        onPress={() => navigation.navigate('Reset')}
+      >
+        <Text style={styles.navButtonText}>Forgot Password? Reset here</Text>
+      </TouchableOpacity>
     </View>
   );
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import SignupScreen from '../screens/SignupScreen';
 import LoginScreen from '../screens/LoginScreen';
+import ResetScreen from '../screens/ResetScreen';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,7 @@ export default function AuthStack() {
         options={{ header: () => null }}
       />
       <Stack.Screen name='Signup' component={SignupScreen} options={{ title: 'Sign Up'}}/>
+      <Stack.Screen name='Reset' component={ResetScreen} options={{ title: 'Reset Password'}}/>
     </Stack.Navigator>
   );
 }

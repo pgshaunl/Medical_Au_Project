@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import firebase from '@react-native-firebase/app';
 import { StyleSheet, Text, View } from 'react-native';
 import { AuthContext } from '../navigation/AuthProvider';
 import FormButton from '../components/FormButton';
@@ -13,6 +14,7 @@ export default function ProfileScreen()  {
         
         <Text>Profile!</Text>
         <Text style={styles.text}>Welcome user {user.email}</Text>
+        <Text style={styles.text}>Welcome user {firebase.auth().currentUser.displayName}</Text>
       <FormButton buttonTitle='Logout' onPress={() => logout()} />
       </View>
     );
