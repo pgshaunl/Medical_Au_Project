@@ -1,5 +1,5 @@
 
-import HeaderScreen from './HeaderScreen';
+import Header from '../components/Header';
 
 
 import React, { Component } from 'react';
@@ -36,7 +36,7 @@ export default class MIScreen extends Component {
   render() {
     return (
       <View style={{height: ScreenHeight}}>
-        <HeaderScreen></HeaderScreen>
+        <Header/>
         <Swiper
         style={styles.wrapper}
         renderPagination={renderPagination}

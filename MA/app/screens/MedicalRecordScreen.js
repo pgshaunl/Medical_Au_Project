@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import HeaderScreen from './HeaderScreen';
+import Header from '../components/Header';
 import {TouchableHighlight} from "react-native-gesture-handler";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { ListItem } from 'react-native-elements';
@@ -36,7 +36,7 @@ class MRScreen extends React.Component {
     return (
       <View>
         <View>
-        <HeaderScreen/>
+        <Header/>
       </View>
 
       <View style = {{flexDirection:"row", alignItems:"center",  height:150, borderBottomColor:"black", borderBottomWidth:1} }>

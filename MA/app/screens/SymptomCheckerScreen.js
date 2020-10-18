@@ -1,13 +1,13 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import HeaderScreen from './HeaderScreen';
+import Header from '../components/Header';
 import LinearGradient from "react-native-linear-gradient";
 
 class SCScreen extends React.Component {
     render() {
         return (
             <View style={{flex:1, backgroundColor:"white"}}>
-                <HeaderScreen/>
+                <Header/>
                 <Text style={styles.hitText}>Hi, are you an adult or child?</Text>
                 <View style={styles.container}>
                     <TouchableOpacity style={styles.rowItem}
