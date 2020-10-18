@@ -84,7 +84,7 @@ export default function HomeScreen({ navigation }) {
         </TouchableHighlight>
       </View>
     </View>
-      <Text style={styles.text}>Welcome user {user.email}</Text>
+
     </View>
   );
 }
