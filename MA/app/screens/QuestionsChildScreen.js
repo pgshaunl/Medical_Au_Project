@@ -1,10 +1,11 @@
 import React from 'react';
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import HeaderScreen from './HeaderScreen';
+import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import Header from '../components/Header';
 import CheckBox from '@react-native-community/checkbox';
 import {Picker} from '@react-native-community/picker';
 
-class QuestionsScreen extends React.Component {
+
+class QuestionsChildScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,9 +17,9 @@ class QuestionsScreen extends React.Component {
     render() {
         return (
             <View style={{flex:1, backgroundColor:"white"}}>
-                <HeaderScreen/>
+                <Header/>
                 <ScrollView>
-                    <Text style={styles.topText}>Adult Symptom</Text>
+                    <Text style={styles.topText}>Child Symptom</Text>
                     <View style={styles.questionTitle}>
                         <Image style={styles.image} source={require('../img/icons/ic_question.jpg')} resizeMode={"center"}></Image>
                         <View style={styles.border}>
@@ -43,7 +44,7 @@ class QuestionsScreen extends React.Component {
                                 onValueChange={(value) =>
                                     this.setState({
                                         Burning : value
-                                })}
+                                    })}
                             />
                             <Text style={styles.label}>Burning</Text>
                         </View>
@@ -222,4 +223,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default QuestionsScreen;
+export default QuestionsChildScreen;

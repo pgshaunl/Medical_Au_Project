@@ -1,15 +1,15 @@
 import React from 'react';
 import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import HeaderScreen from './HeaderScreen';
+import Header from '../components/Header';
 import LinearGradient from "react-native-linear-gradient";
 
-class ResultAdultScreen extends React.Component {
+class ResultChildScreen extends React.Component {
 
 
     render() {
         return (
             <View style={{flex:1, backgroundColor:"white"}}>
-                <HeaderScreen/>
+                <Header/>
                 <ScrollView>
                     <Text style={styles.leftLabel}>Result:</Text>
 
@@ -101,4 +101,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default ResultAdultScreen;
+export default ResultChildScreen;

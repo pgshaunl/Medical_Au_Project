@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Linking } from 'react-native';
-import HeaderScreen from './HeaderScreen';
+import Header from '../components/Header';
 import LinearGradient from "react-native-linear-gradient";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -25,7 +25,7 @@ class ECScreen extends React.Component {
   render() {
     return (
       <View>
-        <HeaderScreen/>
+        <Header/>
         <View style={{padding:5, paddingTop:0}}>
         <Text style={styles.baseText}>
         <Text style={styles.titleText} onPress={this.onPressTitle}>

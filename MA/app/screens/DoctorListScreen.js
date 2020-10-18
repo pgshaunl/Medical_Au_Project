@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderScreen from './HeaderScreen';
+import Header from '../components/Header';
 import { StyleSheet, Text, View, ScrollView, TouchableHighlight} from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
 import Modal from 'react-native-modal';
@@ -107,7 +107,7 @@ class DLScreen extends React.Component {
 
     return (
       <View>
-          <HeaderScreen/>
+          <Header/>
           <Text>{hospital}</Text>
           <Text>{weekDay}</Text>
           <Text>{date}</Text>

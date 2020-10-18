@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-class HeaderScreen extends React.Component {
+class Header extends React.Component {
   render() {
     return (
       <View style={{height:100,}}>
@@ -17,4 +17,4 @@ class HeaderScreen extends React.Component {
   }
 }
 
-export default HeaderScreen;
+export default Header;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import HeaderScreen from './HeaderScreen';
+import Header from '../components/Header';
 import Search from './SearchHomeScreen';
 import {Picker} from '@react-native-community/picker';
 import { TextInput } from 'react-native-gesture-handler';
@@ -24,7 +24,7 @@ class OBScreen extends React.Component {
   render() {
     return (
       <View>
-        <HeaderScreen/>
+        <Header/>
         <View style = {{flexDirection: 'row', justifyContent:"center"}}>
         <Search/>
       </View>

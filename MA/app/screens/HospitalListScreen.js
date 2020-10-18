@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderScreen from './HeaderScreen';
+import Header from '../components/Header';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { ListItem, Icon } from 'react-native-elements'
 
@@ -67,7 +67,7 @@ class HLScreen extends React.Component {
   render() {
     return (
       <View>
-          <HeaderScreen/>
+          <Header/>
           <View>
           <ScrollView>
         {

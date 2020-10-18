@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, TextInput,Image} from 'react-native';
-import HeaderScreen from './HeaderScreen';
+import Header from '../components/Header';
 import {Picker} from '@react-native-community/picker';
 
 
@@ -26,7 +26,7 @@ class ITScreen extends React.Component {
    
     return (
       <View>
-        <HeaderScreen></HeaderScreen>
+        <Header/>
          
          <TextInput style = {styles.input}
                underlineColorAndroid = "transparent"

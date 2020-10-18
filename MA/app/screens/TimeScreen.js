@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View, Button} from 'react-native';
-import HeaderScreen from './HeaderScreen';
+import Header from '../components/Header';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 
@@ -42,7 +42,7 @@ const TimeScreen = (props) => {
 
   return (
     <View>
-      <HeaderScreen/>
+      <Header/>
       <Button title="Show Date Picker" onPress={showDatePicker} />
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
