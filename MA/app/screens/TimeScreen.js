@@ -10,7 +10,7 @@ const TimeScreen = (props) => {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [dateDisplay, setDate] = useState(new Date());
     const [weekDay, setWeekday] = useState(dateDisplay.getDay());
-    const { hospital } = props.route.params;
+    const { hospital ,hospitalAddress} = props.route.params;
 
     const showDatePicker = () => {
         setDatePickerVisibility(true);
@@ -52,8 +52,9 @@ const TimeScreen = (props) => {
       />
       <Text>{getDate()}</Text>
       <Text>Hospital: {hospital}</Text>
+      {/* <Text>Hospital: {hospitalAddress}</Text> */}
       <Button title="Doctor List" onPress={()=>{
-                                              props.navigation.navigate('DoctorList', {weekDay: weekDay, date: dateDisplay.toDateString(), hospital: hospital});
+                                              props.navigation.navigate('DoctorList', {weekDay: weekDay, date: dateDisplay.toDateString(), hospital: hospital,hospitalAddress:hospitalAddress});
                                           }}></Button>
     </View>
   );

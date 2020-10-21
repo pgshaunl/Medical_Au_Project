@@ -11,6 +11,8 @@ import QuestionsScreen from "../screens/QuestionsScreen";
 import ResultAdultScreen from "../screens/ResultAdultScreen";
 import ResultChildScreen from "../screens/ResultChildScreen";
 import QuestionsChildScreen from "../screens/QuestionsChildScreen";
+import ChooseTimeScreen from "../screens/ChooseTime";
+import ConfirmScreen from "../screens/Confirm";
 import HLScreen from "../screens/HospitalListScreen";
 import DLScreen from "../screens/DoctorListScreen";
 import ProfileScreen from '../screens/ProfileScreen';
@@ -30,9 +32,7 @@ export default function HomeStack() {
       headerTitleAlign:'center',
       headerTintColor: '#fff',
       headerTitleStyle: {
-        fontSize:26,
-        fontWeight:"700",
-        fontFamily:"Roboto",
+        fontSize:30,
       },
     }}>
       <Stack.Screen name="Home" component={HomeScreen}
@@ -79,6 +79,21 @@ export default function HomeStack() {
      
      })}/>
       <Stack.Screen name="HospitalList" component={HLScreen} options={({navigation}) => ({ title: 'Online Booking', headerRight: ()=>(
+        <Icon name="home"
+              onPress={() => navigation.navigate("Home")}
+              size={30} color="white" style={{marginRight:20}}/>
+     )   
+     
+     })}/>
+     <Stack.Screen name="Confirm" component={ConfirmScreen} options={({navigation}) => ({ title: 'Confirm', headerRight: ()=>(
+        <Icon name="home"
+              onPress={() => navigation.navigate("Home")}
+              size={30} color="white" style={{marginRight:20}}/>
+     )   
+     
+     })}/>
+
+<Stack.Screen name="ChooseTime" component={ChooseTimeScreen} options={({navigation}) => ({ title: 'Choose Time', headerRight: ()=>(
         <Icon name="home"
               onPress={() => navigation.navigate("Home")}
               size={30} color="white" style={{marginRight:20}}/>

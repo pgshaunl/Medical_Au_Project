@@ -73,7 +73,7 @@ class HLScreen extends React.Component {
         {
         hospital_list.map((l, i) => (
             <ListItem key={i} bottomDivider onPress={()=>{
-                this.props.navigation.navigate('Time', {hospital: l.name})
+                this.props.navigation.navigate('Time', {hospital: l.name,hospitalAddress:l.address})
             }}>
             <Icon name="local-hospital" />
             <ListItem.Content>
