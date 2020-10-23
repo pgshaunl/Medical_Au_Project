@@ -32,7 +32,9 @@ export default function HomeStack() {
       headerTitleAlign:'center',
       headerTintColor: '#fff',
       headerTitleStyle: {
-        fontSize:30,
+        fontSize:26,
+        fontWeight:"700",
+        fontFamily:"Roboto",
       },
     }}>
       <Stack.Screen name="Home" component={HomeScreen}
