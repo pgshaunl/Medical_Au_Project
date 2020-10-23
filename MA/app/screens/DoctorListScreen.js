@@ -13,7 +13,8 @@ const list = [
       work_day: [1,3,4],
       hospital: 'Southbank Day Hospital',
       gender: 'Female',
-      language: 'English'
+      language: 'English',
+      unWork:[1,2,3,7]
     },
     {
       name: 'Chris Jackson',
@@ -22,7 +23,8 @@ const list = [
       work_day: [2,5,6],
       hospital: 'Southbank Day Hospital',
       gender: 'Male',
-      language: 'Chinese, English'
+      language: 'Chinese, English',
+      unWork:[1,2,3,7]
     },
     {
       name: 'Emma Watson',
@@ -31,7 +33,8 @@ const list = [
       work_day: [0,3,6],
       hospital: 'Toowong Hospital',
       gender: 'Female',
-      language: 'English'
+      language: 'English',
+      unWork:[1,2,3,7]
 
     },
     {
@@ -41,7 +44,8 @@ const list = [
       work_day: [1,5],
       hospital: 'AKA Hospital',
       gender: 'Male',
-      language: 'English'
+      language: 'English',
+      unWork:[1,2,3,7]
     },
 
     {
@@ -51,7 +55,8 @@ const list = [
       work_day: [0,1,3,4,5],
       hospital: 'Southbank Day Hospital',
       gender: 'Female',
-      language: 'Japanese'
+      language: 'Japanese',
+      unWork:[1,2,3,7]
     },
     {
       name: 'LI',
@@ -60,7 +65,8 @@ const list = [
       work_day: [2,5,6],
       hospital: 'Southbank Day Hospital',
       gender: 'Male',
-      language: 'Chinese, English'
+      language: 'Chinese, English',
+      unWork:[1,2,3,7]
     },
     
   ]
@@ -79,6 +85,7 @@ class DLScreen extends React.Component {
     isAvailable: false,
     gender: null,
     language: null,
+    unWork:[-1,-2]
   };
 
   setModalVisible = (visible) => {
@@ -87,6 +94,10 @@ class DLScreen extends React.Component {
 
   setDoctor = (name) => {
     this.setState({ doctor: name});
+  }
+
+  setUnWork = (unWork) => {
+    this.setState({ unWork: unWork});
   }
 
   setAvailable = (available) => {
@@ -102,8 +113,8 @@ class DLScreen extends React.Component {
   }
 
   render() {
-    const { modalVisible, doctor, isAvailable, gender, language } = this.state;
-    const { weekDay, date, hospital } = this.props.route.params;
+    const { modalVisible, doctor, isAvailable, gender, language ,unWork} = this.state;
+    const { weekDay, date, hospital ,hospitalAddress} = this.props.route.params;
 
     return (
       <View>
@@ -111,6 +122,7 @@ class DLScreen extends React.Component {
           <Text>{hospital}</Text>
           <Text>{weekDay}</Text>
           <Text>{date}</Text>
+          {/* <Text>{hospitalAddress}</Text> */}
           <View>
           <ScrollView>
         {
@@ -120,6 +132,7 @@ class DLScreen extends React.Component {
               {this.setAvailable(l.work_day.includes(weekDay));
                 this.setGender(l.gender);
                 this.setLanguage(l.language);
+                this.setUnWork(l.unWork);
               this.setModalVisible(true); this.setDoctor(l.name);}} >
               <Avatar source={{uri: l.avatar_url}} />
               <ListItem.Content>
@@ -150,6 +163,7 @@ class DLScreen extends React.Component {
                 onPress={()=>{
                   if(isAvailable === true) {
                     this.setModalVisible(!modalVisible);
+                    this.props.navigation.navigate("ChooseTime",{doctor:doctor,date:date,hospital:hospital,hospitalAddress:hospitalAddress,unWork:unWork});
                   } else {
                     alert("Sorry, this GP cannot be booked today");
                   }

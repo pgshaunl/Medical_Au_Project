@@ -69,6 +69,6 @@ const styles = StyleSheet.create({
   },
   navButtonText: {
     fontSize: 20,
-    color: '#008AD0'
+    color: '#6646ee'
   }
 });

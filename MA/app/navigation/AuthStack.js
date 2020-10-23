@@ -17,9 +17,7 @@ export default function AuthStack() {
       headerTitleAlign:'center',
       headerTintColor: '#fff',
       headerTitleStyle: {
-        fontSize:26,
-        fontWeight:"700",
-        fontFamily:"Roboto",
+        fontSize:30,
       },
     }}>
       <Stack.Screen
