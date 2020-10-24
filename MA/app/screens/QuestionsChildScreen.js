@@ -10,7 +10,9 @@ class QuestionsChildScreen extends React.Component {
         super(props);
         this.state = {
             language: null,
-            Burning:false
+            Burning:false,
+            painValue:"Burning",
+            locatedValue:"Middle"
         };
     }
 
@@ -40,20 +42,20 @@ class QuestionsChildScreen extends React.Component {
                     <View style={{flexDirection:"row",width:"70%",marginLeft:1}}>
                         <View style={styles.checkboxContainer}>
                             <CheckBox
-                                value={this.state.Burning}
+                                value={this.state.painValue==="Burning"}
                                 onValueChange={(value) =>
                                     this.setState({
-                                        Burning : value
+                                        painValue : "Burning"
                                     })}
                             />
                             <Text style={styles.label}>Burning</Text>
                         </View>
                         <View style={styles.checkboxContainer}>
                             <CheckBox
-                                value={this.state.Sudden}
+                                value={this.state.painValue==="Sudden"}
                                 onValueChange={(value) =>
                                     this.setState({
-                                        Sudden : value
+                                        painValue : "Sudden"
                                     })}
                             />
                             <Text style={styles.label}>Sudden</Text>
@@ -62,20 +64,20 @@ class QuestionsChildScreen extends React.Component {
                     <View style={{flexDirection:"row",width:"70%",marginLeft:1}}>
                         <View style={styles.checkboxContainer}>
                             <CheckBox
-                                value={this.state.Ongoing}
+                                value={this.state.painValue==="Ongoing"}
                                 onValueChange={(value) =>
                                     this.setState({
-                                        Ongoing : value
+                                        painValue : "Ongoing"
                                     })}
                             />
                             <Text style={styles.label}>Ongoing</Text>
                         </View>
                         <View style={styles.checkboxContainer}>
                             <CheckBox
-                                value={this.state.Crampy}
+                                value={this.state.painValue==="Crampy"}
                                 onValueChange={(value) =>
                                     this.setState({
-                                        Crampy : value
+                                        painValue : "Crampy"
                                     })}
                             />
                             <Text style={styles.label}>Crampy</Text>
@@ -84,30 +86,30 @@ class QuestionsChildScreen extends React.Component {
                     <Text style={styles.leftLabel}>Pain located in:</Text>
                     <View style={styles.checkboxContainer}>
                         <CheckBox
-                            value={this.state.Middle}
+                            value={this.state.locatedValue==="Middle"}
                             onValueChange={(value) =>
                                 this.setState({
-                                    Middle : value
+                                    locatedValue : "Middle"
                                 })}
                         />
                         <Text style={styles.label}>Middle adbomen</Text>
                     </View>
                     <View style={styles.checkboxContainer}>
                         <CheckBox
-                            value={this.state.Low}
+                            value={this.state.locatedValue==="Low"}
                             onValueChange={(value) =>
                                 this.setState({
-                                    Low : value
+                                    locatedValue : "Low"
                                 })}
                         />
                         <Text style={styles.label}>Low adbomen</Text>
                     </View>
                     <View style={styles.checkboxContainer}>
                         <CheckBox
-                            value={this.state.Upper}
+                            value={this.state.locatedValue==="Upper"}
                             onValueChange={(value) =>
                                 this.setState({
-                                    Upper : value
+                                    locatedValue : "Upper"
                                 })}
                         />
                         <Text style={styles.label}>Upper adbomen</Text>
@@ -176,14 +178,14 @@ class QuestionsChildScreen extends React.Component {
 const styles = StyleSheet.create({
     topText: {
         margin:10,
-        fontSize:20,
-        color: "#2243e3",
-        textDecorationLine:"underline"
+        fontSize:17,
+        //color: "#2243e3",
+        //textDecorationLine:"underline"
     },
     leftLabel: {
         margin:10,
         fontSize:16,
-        textDecorationLine:"underline"
+        //textDecorationLine:"underline"
     },
 
     questionTitle: {
@@ -194,7 +196,7 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     questionText:{
-        fontSize:16,
+        fontSize:14,
         height:40,
         textAlign:"center",
         borderWidth:1.5,
