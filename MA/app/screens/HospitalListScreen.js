@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { ListItem, Icon } from 'react-native-elements'
+import Search from './SearchHomeScreen';
 
 const hospital_list = [
   {
@@ -64,41 +65,59 @@ const hospital_list = [
 
 
 class HLScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.search = React.createRef();
+    this.state = {
+      hospitalList: hospital_list,
+    };
+  }
+  onSearch= (value) =>{
+    this.setState({
+      hospitalList:hospital_list.filter(item => item.name.toLocaleLowerCase().indexOf(value.toLocaleString())!=-1)
+    })
+    // console.log(value);
+    //.filter(item => item.name.indexOf(this.search.current.state.search)!=-1)
+  }
+
   render() {
     return (
-      <View>
+        <View>
           <Header/>
-          <View>
-          <ScrollView>
-        {
-        hospital_list.map((l, i) => (
-            <ListItem key={i} bottomDivider onPress={()=>{
-                this.props.navigation.navigate('Time', {hospital: l.name,hospitalAddress:l.address})
-            }}>
-            <Icon name="local-hospital" />
-            <ListItem.Content>
-                <ListItem.Title>{l.name}</ListItem.Title>
-                <ListItem.Subtitle>{l.address}</ListItem.Subtitle>
-            </ListItem.Content>
-            <ListItem.Chevron color="grey" />
-            </ListItem>
-        ))
-        }
-        </ScrollView>
+          <View style = {{flexDirection: 'row', justifyContent:"center"}}>
+            <Search onChange={this.onSearch} />
           </View>
-        
-      </View>
+          <View>
+            <ScrollView>
+              {
+                this.state.hospitalList.map((l, i) => (
+                    <ListItem key={i} bottomDivider onPress={()=>{
+                      this.props.navigation.navigate('Time', {hospital: l.name})
+                    }}>
+                      <Icon name="local-hospital" />
+                      <ListItem.Content>
+                        <ListItem.Title>{l.name}</ListItem.Title>
+                        <ListItem.Subtitle>{l.address}</ListItem.Subtitle>
+                      </ListItem.Content>
+                      <ListItem.Chevron color="grey" />
+                    </ListItem>
+                ))
+              }
+            </ScrollView>
+          </View>
+
+        </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  });
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
 export default HLScreen;
