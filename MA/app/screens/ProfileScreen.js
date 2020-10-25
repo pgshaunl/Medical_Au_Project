@@ -1,11 +1,9 @@
 import React, { useContext, useState, useEffect} from 'react';
-import firebase from '@react-native-firebase/app';
 import database from '@react-native-firebase/database';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight, Alert } from 'react-native';
 import { AuthContext } from '../navigation/AuthProvider';
 import FormButton from '../components/FormButton';
 import Header from '../components/Header';
-import { TouchableHighlight } from 'react-native-gesture-handler';
 import { Input } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import { ListItem, Icon } from 'react-native-elements';
@@ -17,6 +15,7 @@ export default function ProfileScreen()  {
   const [name, setName] = useState("");
   const [input, setInput] = useState('');
   const [stakeHolder, setStakeHolder] = useState('');
+  const [description, setDescription] = useState('');
   const [headline, setHeadline] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -38,13 +37,27 @@ export default function ProfileScreen()  {
   
 
     const update =() => {
-      
-
+      database().ref(`/user/${user.uid}`).update({
+          name: name,
+          gender: gender,
+          dob: dob,
+          address: address
+        }).then(() =>  Alert.alert(
+          "Message",
+          "Your profile has been updated",
+          [
+            {
+              text: "OK",
+              onPress: () => console.log("OK")
+            },
+          ],
+        ));
     }
     
     const list = [
       {
         title: "Name",
+        descprition: "Input your name here",
         icon: 'person-outline',
         subtitle: name,
       },
@@ -55,16 +68,19 @@ export default function ProfileScreen()  {
       },
       {
         title: "Date of Birth",
+        descprition: "Input DD/MM/YYYY here",
         icon: 'av-timer',
         subtitle: dob
       },
       {
         title: "Gender",
+        descprition: "Input male or female here",
         icon: 'wc',
         subtitle: gender
       },
       {
         title: "Address",
+        descprition: "Input your address here",
         icon: 'pin-drop',
         subtitle: address
       },
@@ -81,8 +97,10 @@ export default function ProfileScreen()  {
           alert("Sorry, your email cannot be changed");
         } else {
           setHeadline(item.title);
-          setModalVisible(true);
           setStakeHolder(item.subtitle);
+          setDescription(item.descprition);
+          setModalVisible(true);
+          
         }
       }}>
         <Icon name={item.icon}/>
@@ -96,7 +114,7 @@ export default function ProfileScreen()  {
   }
 </View>
       <FormButton buttonTitle='Logout' onPress={() => logout()} />
-      <FormButton buttonTitle='testModal' onPress={() => setModalVisible(true)} />
+      <FormButton buttonTitle='Update profile' onPress={() => update()} />
       <View style={styles.centeredView}>
         <Modal
           animationType="slide"
@@ -106,7 +124,9 @@ export default function ProfileScreen()  {
           
             <View style={styles.modalView}>
 
-              <Text style={styles.modalText}>{headline}</Text>
+              <Text style={styles.modalHead}>{headline}</Text>
+              <Text style={styles.modalSub}>{description}</Text>
+              
               <Input
                 placeholder = {stakeHolder}
                 onChangeText={value => setInput(value)}
@@ -115,8 +135,17 @@ export default function ProfileScreen()  {
               <TouchableHighlight
                 style={{ ...styles.modalButton, backgroundColor: "#2196F3" }}
                 onPress={()=>{
-                  alert("111");
-                  this.setModalVisible(!modalVisible);
+                  if (headline === "Name") {
+                    setName(input);
+                  } else if (headline === "Date of Birth") {
+                    setDob(input);
+                  } else if (headline === "Gender") {
+                    setGender(input);
+                  } else if (headline === "Address") {
+                    setAddress(input);
+                  }
+
+                  setModalVisible(!modalVisible);
               }}
               >
                 <Text style={styles.textStyle}>Confirm</Text>
@@ -179,10 +208,17 @@ const styles = StyleSheet.create({
       fontWeight: "bold",
       textAlign: "center"
     },
-    modalText: {
-      marginBottom: 15,
+    modalHead: {
+      marginBottom: 1,
       textAlign: "center",
       fontSize: 20,
+      fontWeight:"bold"
+    },
+    modalSub: {
+      marginBottom: 15,
+      textAlign: "center",
+      fontSize: 15,
+      color:'#666666',
     },
     input: {
       width: 100,
