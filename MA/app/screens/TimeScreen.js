@@ -9,6 +9,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 const TimeScreen = (props) => {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [dateDisplay, setDate] = useState(new Date());
+    const [address] = useState('"259 Wickham Terrace, Brisbane QLD 4000, Australia Hospital in Spring Hill, Australia"');
     const [weekDay, setWeekday] = useState(dateDisplay.getDay());
     const { hospital ,hospitalAddress} = props.route.params;
 
@@ -56,6 +57,10 @@ const TimeScreen = (props) => {
       <Button title="Doctor List" onPress={()=>{
                                               props.navigation.navigate('DoctorList', {weekDay: weekDay, date: dateDisplay.toDateString(), hospital: hospital,hospitalAddress:hospitalAddress});
                                           }}></Button>
+    <View>
+        <Text>  </Text>
+        <Text> Address: {address} </Text>
+    </View>
     </View>
   );
   };
