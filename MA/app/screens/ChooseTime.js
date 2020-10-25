@@ -6,7 +6,7 @@ import Header from '../components/Header';
 class ChooseTimeScreen extends React.Component {
   render() {
     var {doctor,hospital,date,unWork,hospitalAddress} = this.props.route.params;
-    var unWorkTime = [-1];
+    var unWorkTime = unWork;
     var isChoosed = false;
     var slotChoosed = null;
     const TimeZone = ["9:00 -- 9:30","9:30 -- 10:00","10:00 -- 10:30","10:30 -- 11:00","11:00 -- 11:30","11:30-- 12:00","12:00 -- 12:30","12:30 -- 13:00","13:00 -- 13:30",
@@ -14,7 +14,6 @@ class ChooseTimeScreen extends React.Component {
 
     
     
-    unWorkTime = unWork;
     return (
       <View>
            <Header/>
