@@ -1,7 +1,6 @@
 import React, {useContext} from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import Header from '../components/Header';
-import { AuthContext } from '../navigation/AuthProvider';
 import {TouchableHighlight} from "react-native-gesture-handler";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { ListItem } from 'react-native-elements';
@@ -95,9 +94,9 @@ class MRScreen extends React.Component {
               list.map((item, i) => (
                 <ListItem key={i} bottomDivider>
                   <ListItem.Content >
-              <ListItem.Title>{item.date}</ListItem.Title>
-              <ListItem.Subtitle>Hospital: {item.hospital}</ListItem.Subtitle>
-              <ListItem.Subtitle>Doctor: {item.doctor}</ListItem.Subtitle>
+              <ListItem.Title style={{fontWeight:"bold"}}>{item.date}</ListItem.Title>
+              <ListItem.Subtitle><Text style={{fontWeight:"bold" }}>    Hospital:</Text> {item.hospital}</ListItem.Subtitle>
+              <ListItem.Subtitle><Text style={{fontWeight:"bold"}}>    Doctor:</Text> {item.doctor}</ListItem.Subtitle>
                   </ListItem.Content>
                   <ListItem.Chevron />
                 </ListItem>
