@@ -26,7 +26,7 @@ class OBScreen extends React.Component {
       <View>
         <Header/>
         <View style = {{flexDirection: 'row', justifyContent:"center"}}>
-        <Search/>
+        {/*<Search/>*/}
       </View>
 
       <View style = {{flexDirection: 'column', justifyContent:"center", alignItems:"center", padding:10}}>
@@ -35,7 +35,7 @@ class OBScreen extends React.Component {
         <Text style={styles.header} >Step 1</Text>
         <View style={styles.pickerContainer} >
         <View style={styles.icon} ><Icon name="map" color="grey" size={25}  /></View>
-        
+
         <View>
           <TextInput style = {styles.input}
                underlineColorAndroid = "transparent"
@@ -46,13 +46,13 @@ class OBScreen extends React.Component {
                maxLength = {15}
           />
         </View>
-        </View>   
+        </View>
       </View>
-      
+
       <View style = {styles.container}>
         <Text style={styles.header} >Step 2</Text>
         <View style={styles.pickerContainer} >
-        
+
         <View style={styles.icon} ><Icon name="navigation" color="grey" size={25} /></View>
         <View>
         <Picker
@@ -69,8 +69,8 @@ class OBScreen extends React.Component {
         </Picker>
         </View>
         </View>
-        
-        
+
+
       </View>
 
       </View>
@@ -81,7 +81,7 @@ class OBScreen extends React.Component {
 
       <View style={{ alignItems:"center",
                         justifyContent:"center"}}>
-                        <TouchableOpacity 
+                        <TouchableOpacity
                                           onPress={()=>{
                                               this.props.navigation.navigate('HospitalList')
                                           }}>
@@ -100,11 +100,11 @@ class OBScreen extends React.Component {
                         </TouchableOpacity>
 
                     </View>
-                    
+
       </View>
-      
-      
-      
+
+
+
     );
   }
 }
