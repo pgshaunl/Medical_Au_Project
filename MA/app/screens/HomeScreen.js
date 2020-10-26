@@ -8,11 +8,15 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 
 export default function HomeScreen({ navigation }) {
   const { user, logout } = useContext(AuthContext);
+
+  function onFocus(){
+    navigation.navigate('HospitalList')
+  }
   return (
     <View style={styles.container}>
       <Header/>
       <View style = {{flexDirection: 'row', justifyContent:"center"}}>
-        <Search/>
+        <Search onFocus={onFocus}/>
       </View>
 
       <View style={{margin:10}}>

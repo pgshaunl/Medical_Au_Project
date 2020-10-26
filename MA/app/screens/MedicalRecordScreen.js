@@ -1,38 +1,72 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import Header from '../components/Header';
 import {TouchableHighlight} from "react-native-gesture-handler";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { ListItem } from 'react-native-elements';
+import firebase from '@react-native-firebase/app';
+import database from '@react-native-firebase/database';
+
 
 const list = [
   {
     date: '12/06/2019',
-    hospital: 'Southbank Hospital'
+    hospital: 'Southbank Hospital',
+    doctor: 'shuan'
   },
   {
     date: '06/07/2020',
-    hospital: 'Higgg Hospital'
+    hospital: 'Higgg Hospital',
+    doctor: 'shuan'
   },
   {
     date: '06/07/2020',
-    hospital: 'Higgg Hospital'
+    hospital: 'Higgg Hospital',
+    doctor: 'shuan'
   },
   {
     date: '06/07/2020',
-    hospital: 'Higgg Hospital'
+    hospital: 'Higgg Hospital',
+    doctor: 'shuan'
   },
   {
     date: '06/07/2020',
-    hospital: 'Higgg Hospital'
+    hospital: 'Higgg Hospital',
+    doctor: 'shuan'
   },
 ]
 
 
 class MRScreen extends React.Component {
- 
+  constructor(props) {
+    super(props);
+  }
+
+  state = {
+    name: '',
+  }
+
+  state = {
+    modalVisible: false,
+    doctor: "111",
+    isAvailable: false,
+    gender: null,
+    language: null,
+    unWork:[-1,-2]
+  };
+
+  setName = (name) => {
+    this.setState({ name: name });
+  }
+
+  componentDidMount() {
+    database().ref(`/user/${firebase.auth().currentUser.uid}`).once('value', snapshot => {
+      this.setName(snapshot.val().name);
+    });
+  }
 
   render() {
+   
     return (
       <View>
         <View>
@@ -48,8 +82,8 @@ class MRScreen extends React.Component {
         </TouchableHighlight>
      </View>
       <View style={{justifyContent:"center" , margin:10, width:250}}>
-        <Text style={{fontSize:25, margin:10, fontWeight:"bold"}} >USER ID</Text>
-        <Text style={{fontSize:20, margin:7, color:"#13C7DC"}}>USER EMAIL</Text>
+        <Text style={{fontSize:25, margin:10, fontWeight:"bold"}} >{this.state.name}</Text>
+        <Text style={{fontSize:20, margin:7, color:"#13C7DC"}}>{firebase.auth().currentUser.email}</Text>
       </View>
       </View>
 
@@ -59,8 +93,10 @@ class MRScreen extends React.Component {
             {
               list.map((item, i) => (
                 <ListItem key={i} bottomDivider>
-                  <ListItem.Content>
-              <ListItem.Title>{item.date}       {item.hospital}</ListItem.Title>
+                  <ListItem.Content >
+              <ListItem.Title style={{fontWeight:"bold"}}>{item.date}</ListItem.Title>
+              <ListItem.Subtitle><Text style={{fontWeight:"bold" }}>    Hospital:</Text> {item.hospital}</ListItem.Subtitle>
+              <ListItem.Subtitle><Text style={{fontWeight:"bold"}}>    Doctor:</Text> {item.doctor}</ListItem.Subtitle>
                   </ListItem.Content>
                   <ListItem.Chevron />
                 </ListItem>

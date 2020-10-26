@@ -122,7 +122,7 @@ class DLScreen extends React.Component {
           <Text>{hospital}</Text>
           <Text>{weekDay}</Text>
           <Text>{date}</Text>
-          {/* <Text>{hospitalAddress}</Text> */}
+          <Text>{hospitalAddress}</Text>
           <View>
           <ScrollView>
         {

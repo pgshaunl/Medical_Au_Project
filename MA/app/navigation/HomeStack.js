@@ -13,7 +13,7 @@ import ResultChildScreen from "../screens/ResultChildScreen";
 import QuestionsChildScreen from "../screens/QuestionsChildScreen";
 import ChooseTimeScreen from "../screens/ChooseTime";
 import ConfirmScreen from "../screens/Confirm";
-import HLScreen from "../screens/HospitalListScreen";
+import HLScreen from "../screens/HospitalList";
 import DLScreen from "../screens/DoctorListScreen";
 import ProfileScreen from '../screens/ProfileScreen';
 import TimeScreen from '../screens/TimeScreen';
@@ -32,7 +32,9 @@ export default function HomeStack() {
       headerTitleAlign:'center',
       headerTintColor: '#fff',
       headerTitleStyle: {
-        fontSize:30,
+        fontSize:26,
+        fontWeight:"700",
+        fontFamily:"Roboto",
       },
     }}>
       <Stack.Screen name="Home" component={HomeScreen}

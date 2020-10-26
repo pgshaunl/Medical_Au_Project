@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button,TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Button,TouchableHighlight,Alert } from 'react-native';
 import Header from '../components/Header';
 
 
@@ -49,7 +49,7 @@ class ConfirmScreen extends React.Component  {
         <Text>Choosed Time:{slotChoosed}</Text>
         <TouchableHighlight
                 style={{  backgroundColor:"red"}}
-                onPress={()=>{alert("Successfully booked!")}}
+                onPress={()=>{Alert.alert("Congratulations!","Successfully booked!")}}
                 
               >
                 <Text >Confirm</Text>
