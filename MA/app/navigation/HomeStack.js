@@ -11,8 +11,8 @@ import QuestionsScreen from "../screens/QuestionsScreen";
 import ResultAdultScreen from "../screens/ResultAdultScreen";
 import ResultChildScreen from "../screens/ResultChildScreen";
 import QuestionsChildScreen from "../screens/QuestionsChildScreen";
-import ChooseTimeScreen from "../screens/ChooseTime";
-import ConfirmScreen from "../screens/Confirm";
+import TimeSlotScreen from "../screens/TimeSlotScreen";
+import ConfirmScreen from "../screens/ConfirmScreen";
 import HLScreen from "../screens/HospitalListScreen";
 import DLScreen from "../screens/DoctorListScreen";
 import ProfileScreen from '../screens/ProfileScreen';
@@ -95,7 +95,7 @@ export default function HomeStack() {
      
      })}/>
 
-<Stack.Screen name="ChooseTime" component={ChooseTimeScreen} options={({navigation}) => ({ title: 'Choose Time', headerRight: ()=>(
+<Stack.Screen name="ChooseTime" component={TimeSlotScreen} options={({navigation}) => ({ title: 'Choose Time', headerRight: ()=>(
         <Icon name="home"
               onPress={() => navigation.navigate("Home")}
               size={30} color="white" style={{marginRight:20}}/>

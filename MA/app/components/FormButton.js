@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
     borderRadius: 8
   },
   buttonText: {
-    fontSize: 24,
+    fontSize: 19,
+    fontWeight:"bold",
     color: '#ffffff'
   }
 });

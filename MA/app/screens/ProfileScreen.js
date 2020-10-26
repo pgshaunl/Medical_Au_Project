@@ -14,10 +14,9 @@ export default function ProfileScreen()  {
   const [address, setAddress] = useState("");
   const [name, setName] = useState("");
   const [input, setInput] = useState('');
-  const [stakeHolder, setStakeHolder] = useState('');
+  const [placeHolder, setPlaceHolder] = useState('');
   const [description, setDescription] = useState('');
-  const [headline, setHeadline] = useState('');
-  const [modalVisible, setModalVisible] = useState(false);
+   
 
   const { user, logout } = useContext(AuthContext);
 
@@ -97,7 +96,7 @@ export default function ProfileScreen()  {
           alert("Sorry, your email cannot be changed");
         } else {
           setHeadline(item.title);
-          setStakeHolder(item.subtitle);
+          setPlaceHolder(item.subtitle);
           setDescription(item.descprition);
           setModalVisible(true);
           
@@ -128,7 +127,7 @@ export default function ProfileScreen()  {
               <Text style={styles.modalSub}>{description}</Text>
               
               <Input
-                placeholder = {stakeHolder}
+                placeholder = {placeHolder}
                 onChangeText={value => setInput(value)}
                 style={styles.input}
               />
