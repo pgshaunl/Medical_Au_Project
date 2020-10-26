@@ -5,6 +5,8 @@ import FormButton from '../components/FormButton';
 import database from '@react-native-firebase/database';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { ListItem, Icon } from 'react-native-elements';
+import ReadMore from '@fawazahmed/react-native-read-more';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 
@@ -135,9 +137,14 @@ const TimeScreen = (props) => {
           }}} />
 
 
-          <View>
-           
-          </View>
+          <ScrollView style={{height:100}}>
+              <View>
+              <ReadMore>
+        {description}
+      </ReadMore>
+              </View>
+         
+          </ScrollView>
     </View>
   );
   };
