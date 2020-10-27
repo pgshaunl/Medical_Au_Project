@@ -60,7 +60,7 @@ const TimeScreen = (props) => {
         return month;
     }
 
-    function getDate() {
+    function DisplayDate() {
         var date = dateProps;
         var year = date.getFullYear().toString();
         var month = (date.getMonth()+1).toString();
@@ -69,44 +69,53 @@ const TimeScreen = (props) => {
         var arr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
         return day+'/'+month+'/'+year +' '+ arr[weekday];
-        };
-    
-        const list = [
-            {
-              title: "Hospital",
-              icon: 'local-hospital',
-              subtitle: name,
-            },
-            {
-                title: "Area",
-                icon: 'map',
-                subtitle: area
-              },
-            {
-              title: "Address",
-              icon: 'pin-drop',
-              subtitle: address
-            },
-            {
-                title: "Reference Price",
-                icon: 'attach-money',
-                subtitle: "$" + price
-              },
-          ]
-          const desList = [
-              {
-                title: "Hospital Description",
-                icon: 'library-books',
-                subtitle: "Read more" 
-              }
-          ]
-          const dateList = [
-            {
-              title: "Choose A Booking Day",
-              icon: 'timer',
-              subtitle: getDate(), 
-            }
-        ]
+    };
+
+    function getDate() {
+      var date = dateProps;
+      var year = date.getFullYear().toString();
+      var month = (date.getMonth()+1).toString();
+      var day = date.getDate().toString();
+
+      return day+'/'+month+'/'+year;
+      };
+
+    const list = [
+        {
+          title: "Hospital",
+          icon: 'local-hospital',
+          subtitle: name,
+        },
+        {
+            title: "Area",
+            icon: 'map',
+            subtitle: area
+          },
+        {
+          title: "Address",
+          icon: 'pin-drop',
+          subtitle: address
+        },
+        {
+            title: "Reference Price",
+            icon: 'attach-money',
+            subtitle: "$" + price
+          },
+      ]
+      const desList = [
+          {
+            title: "Hospital Description",
+            icon: 'library-books',
+            subtitle: "Read more" 
+          }
+      ]
+      const dateList = [
+        {
+          title: "Choose A Booking Day",
+          icon: 'timer',
+          subtitle: DisplayDate(), 
+        }
+    ]
           
 
   return (
@@ -163,7 +172,7 @@ const TimeScreen = (props) => {
         <View style={{ height: 130, alignItems:"center", justifyContent:"center"}}>
         <FormButton buttonTitle='Next step' onPress={()=>{
           if(dateProps.getMonth() > dateMonthGet() || dateProps.getDate() >= dateGet()){
-            props.navigation.navigate('DoctorList', {weekDay: weekDay, date: dateProps.toDateString(), hospitalID: hospitalID });
+            props.navigation.navigate('DoctorList', {weekDay: weekDay, date: getDate(), hospitalID: hospitalID });
           } else {
               Alert.alert("Invalid date","Sorry, the appointment can only be booked from today.")
           }}} />
@@ -254,6 +263,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         height:350,
         width:300,
+        
         padding: 35,
         alignItems: "center",
         shadowColor: "#000",
@@ -266,14 +276,14 @@ const styles = StyleSheet.create({
         elevation: 5
       },
       modalHead: {
-        marginBottom: 10,
+        marginBottom: 15,
         textAlign: "center",
-        fontSize: 21,
-        fontWeight:"bold"
+        fontSize: 23,
+        fontWeight:"bold",
       },
       desScrollView: {
         height:210,
-      }
+      },
 });
 
 export default TimeScreen;
