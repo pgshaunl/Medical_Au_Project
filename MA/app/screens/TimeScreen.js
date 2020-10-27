@@ -48,18 +48,6 @@ const TimeScreen = (props) => {
         hideDatePicker();
     };
 
-    function dateGet() {
-        var date = new Date();
-        var day = date.getDate();
-        return day;
-    }
-
-    function dateMonthGet() {
-        var date = new Date();
-        var month = date.getMonth() + 1;
-        return month;
-    }
-
     function DisplayDate() {
         var date = dateProps;
         var year = date.getFullYear().toString();
@@ -171,11 +159,12 @@ const TimeScreen = (props) => {
      
         <View style={{ height: 130, alignItems:"center", justifyContent:"center"}}>
         <FormButton buttonTitle='Next step' onPress={()=>{
-          if(dateProps.getMonth() > dateMonthGet() || dateProps.getDate() >= dateGet()){
+          if(dateProps.getTime() > new Date().getTime()){
             props.navigation.navigate('DoctorList', {weekDay: weekDay, date: getDate(), hospitalID: hospitalID });
           } else {
-              Alert.alert("Invalid date","Sorry, the appointment can only be booked from today.")
+              Alert.alert("Invalid date","Sorry, the appointment can only be booked after today.")
           }}} />
+          
         </View>
      
         

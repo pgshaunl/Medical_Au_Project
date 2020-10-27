@@ -153,7 +153,7 @@ export default function HomeStack() {
      
      })}/>
 
-<Stack.Screen name="Time" component={TimeScreen} options={({navigation}) => ({ title: 'Choose Time', headerRight: ()=>(
+<Stack.Screen name="Time" component={TimeScreen} options={({navigation}) => ({ title: 'Choose Date', headerRight: ()=>(
         <Icon name="home"
               onPress={() => navigation.navigate("Home")}
               size={30} color="white" style={{marginRight:20}}/>
