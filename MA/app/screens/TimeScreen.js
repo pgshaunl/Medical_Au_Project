@@ -19,7 +19,6 @@ const TimeScreen = (props) => {
     const [area, setArea] = useState('');
     const [price, setPrice] = useState('');
     const [name, setName] = useState('');
-    const [dateDisplay, setDateDisplay] = useState('Choose a day to start your booking');
     const [description, setDescription] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
     
@@ -44,9 +43,8 @@ const TimeScreen = (props) => {
     };
 
     const handleConfirm = (date) => {
-        // console.warn("A date has been picked: ", date);
         setDateProps(date);
-        setWeekday(date.getDay())
+        setWeekday(date.getDay());
         hideDatePicker();
     };
 
@@ -64,27 +62,24 @@ const TimeScreen = (props) => {
 
     function getDate() {
         var date = dateProps;
-       
-
         var year = date.getFullYear().toString();
         var month = (date.getMonth()+1).toString();
         var day = date.getDate().toString();
-        var hour =  date.getHours().toString();
-        var minute = date.getMinutes().toString();
         var weekday = weekDay.toString();
+        var arr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-        return day+'/'+month+'/'+year +' 星期'+ weekday + ' '+hour+':'+(date.getMinutes()<10?'0':'') + minute;
+        return day+'/'+month+'/'+year +' '+ arr[weekday];
         };
     
         const list = [
             {
               title: "Hospital",
-              icon: 'person-outline',
+              icon: 'local-hospital',
               subtitle: name,
             },
             {
                 title: "Area",
-                icon: 'wc',
+                icon: 'map',
                 subtitle: area
               },
             {
@@ -94,17 +89,24 @@ const TimeScreen = (props) => {
             },
             {
                 title: "Reference Price",
-                icon: 'pin-drop',
+                icon: 'attach-money',
                 subtitle: "$" + price
               },
           ]
           const desList = [
               {
                 title: "Hospital Description",
-                icon: 'pin-drop',
-                subtitle: "Tap me" 
+                icon: 'library-books',
+                subtitle: "Read more" 
               }
           ]
+          const dateList = [
+            {
+              title: "Choose A Booking Day",
+              icon: 'timer',
+              subtitle: getDate(), 
+            }
+        ]
           
 
   return (
@@ -114,7 +116,7 @@ const TimeScreen = (props) => {
             {
             list.map((item, i) => (
             <ListItem key={i} bottomDivider >
-            <Icon name={item.icon}/>
+            <Icon name={item.icon} />
             <ListItem.Content>
             <ListItem.Title>{item.title}</ListItem.Title>
             <ListItem.Subtitle>{item.subtitle}</ListItem.Subtitle>
@@ -134,26 +136,39 @@ const TimeScreen = (props) => {
             </ListItem>
             ))
             }
+            {
+            dateList.map((item, i) => (
+            <ListItem key={i} bottomDivider onPress = {()=> {
+                showDatePicker();
+                }}>
+            <Icon name={item.icon}/>
+            <ListItem.Content>
+            <ListItem.Title>{item.title}</ListItem.Title>
+            <ListItem.Subtitle>{item.subtitle}</ListItem.Subtitle>
+            </ListItem.Content>
+            <ListItem.Chevron />
+            </ListItem>
+            ))
+            }
       </View>
      
-     <View style = {styles.timeBox}>
-        <Text>{dateDisplay}</Text>
-     <Button title="Show Date Picker" onPress={showDatePicker} />
+     
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
       />
-     </View>
-
-      
-      <FormButton buttonTitle='Next step' onPress={()=>{
+     
+        <View style={{ height: 130, alignItems:"center", justifyContent:"center"}}>
+        <FormButton buttonTitle='Next step' onPress={()=>{
           if(dateProps.getMonth() > dateMonthGet() || dateProps.getDate() >= dateGet()){
             props.navigation.navigate('DoctorList', {weekDay: weekDay, date: dateProps.toDateString(), hospitalID: hospitalID });
           } else {
-              Alert.alert("Invalid date","Sorry, the date in the past cannot be booked.")
+              Alert.alert("Invalid date","Sorry, the appointment can only be booked from today.")
           }}} />
+        </View>
+     
         
           <View style={styles.centeredView}>
         <Modal
@@ -227,13 +242,6 @@ const styles = StyleSheet.create({
         textAlign:"center",
         fontSize:20,
         color:"white"
-    },
-    timeBox: {
-        
-    },
-    desBox: {
-        backgroundColor: "blue",
-
     },
     centeredView: {
         flex: 1,

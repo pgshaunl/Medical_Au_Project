@@ -56,7 +56,7 @@ export default function ProfileScreen()  {
       {
         title: "Name",
         descprition: "Input your name here",
-        icon: 'person-outline',
+        icon: 'portrait',
         subtitle: name,
       },
       {
