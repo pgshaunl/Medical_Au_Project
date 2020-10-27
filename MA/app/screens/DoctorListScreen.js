@@ -4,74 +4,10 @@ import { StyleSheet, Text, View, ScrollView, TouchableHighlight} from 'react-nat
 import { ListItem, Avatar } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/AntDesign';
+import database from '@react-native-firebase/database';
+import { windowHeight } from '../utils/Dimensions';
 
-const list = [
-    {
-      name: 'Amy Farha',
-      avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-      subtitle: 'General Practioner',
-      work_day: [1,3,4],
-      hospital: 'Southbank Day Hospital',
-      gender: 'Female',
-      language: 'English',
-      unWork:[1,2,3,7]
-    },
-    {
-      name: 'Chris Jackson',
-      avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-      subtitle: 'General Practioner',
-      work_day: [2,5,6],
-      hospital: 'Southbank Day Hospital',
-      gender: 'Male',
-      language: 'Chinese, English',
-      unWork:[1,2,3,7]
-    },
-    {
-      name: 'Emma Watson',
-      avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-      subtitle: 'General Practioner',
-      work_day: [0,3,6],
-      hospital: 'Toowong Hospital',
-      gender: 'Female',
-      language: 'English',
-      unWork:[1,2,3,7]
 
-    },
-    {
-      name: 'James Bond',
-      avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-      subtitle: 'General Practioner',
-      work_day: [1,5],
-      hospital: 'AKA Hospital',
-      gender: 'Male',
-      language: 'English',
-      unWork:[1,2,3,7]
-    },
-
-    {
-      name: 'Yushiko',
-      avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-      subtitle: 'General Practioner',
-      work_day: [0,1,3,4,5],
-      hospital: 'Southbank Day Hospital',
-      gender: 'Female',
-      language: 'Japanese',
-      unWork:[1,2,3,7]
-    },
-    {
-      name: 'LI',
-      avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-      subtitle: 'General Practioner',
-      work_day: [2,5,6],
-      hospital: 'Southbank Day Hospital',
-      gender: 'Male',
-      language: 'Chinese, English',
-      unWork:[1,2,3,7]
-    },
-    
-  ]
-
-  
 
 
 class DLScreen extends React.Component {
@@ -79,13 +15,18 @@ class DLScreen extends React.Component {
       super(props);
     }
   
+  
   state = {
     modalVisible: false,
-    doctor: "111",
+    doctor: "",
     isAvailable: false,
     gender: null,
     language: null,
-    unWork:[-1,-2]
+    doctorList: [],
+    hospital: [],
+    hospitalName:"",
+    hospitalID : this.props.route.params.hospitalID,
+    doctorID: "",
   };
 
   setModalVisible = (visible) => {
@@ -96,8 +37,8 @@ class DLScreen extends React.Component {
     this.setState({ doctor: name});
   }
 
-  setUnWork = (unWork) => {
-    this.setState({ unWork: unWork});
+  setDoctorID = (id) => {
+    this.setState({ doctorID: id});
   }
 
   setAvailable = (available) => {
@@ -112,34 +53,45 @@ class DLScreen extends React.Component {
     this.setState({language: language})
   }
 
+  setHospitalName = (name) => {
+    this.setState({ hospitalName: name});
+  }
+
+  componentDidMount() {
+    database().ref(`/Doctor`).once('value', snapshot => {
+      this.setState({doctorList: snapshot.val()})
+    });
+    database().ref(`/Hospital/${this.state.hospitalID}`).once('value', snapshot => {
+      this.setState({hospital: snapshot.val()})
+    });
+  }
+
   render() {
-    const { modalVisible, doctor, isAvailable, gender, language ,unWork} = this.state;
-    const { weekDay, date, hospital ,hospitalAddress} = this.props.route.params;
+    const { modalVisible, doctor, isAvailable, gender, language , doctorList, doctorID, hospital, hospitalName} = this.state;
+    const { weekDay, date, hospitalID } = this.props.route.params;
 
     return (
       <View>
           <Header/>
-          <Text>{hospital}</Text>
-          <Text>{weekDay}</Text>
-          <Text>{date}</Text>
-          <Text>{hospitalAddress}</Text>
-          <View>
-          <ScrollView>
+          <View style = {{height: windowHeight - 130}}>
+          <ScrollView persistentScrollbar = {true}>
         {
-          list.map((l, i) => (
-            hospital === l.hospital ? 
+          doctorList.map((l, i) => (
+            hospital.hospital_name  === l.hospital_name ? 
              <ListItem key={i} bottomDivider onPress={() => 
               {this.setAvailable(l.work_day.includes(weekDay));
                 this.setGender(l.gender);
                 this.setLanguage(l.language);
-                this.setUnWork(l.unWork);
-              this.setModalVisible(true); this.setDoctor(l.name);}} >
-              <Avatar source={{uri: l.avatar_url}} />
+                this.setHospitalName(l.hospital_name);
+                this.setDoctorID(i);
+              this.setModalVisible(true); this.setDoctor(l.doctor_name);}} >
+              <Avatar source={{uri: l.image}} />
               <ListItem.Content>
-                <ListItem.Title style={{fontSize:21}} >{l.name}</ListItem.Title>
-                <ListItem.Subtitle style={{fontSize:17}} >{l.subtitle}</ListItem.Subtitle>
+                <ListItem.Title  >{l.doctor_name}</ListItem.Title>
+                <ListItem.Subtitle >{l.title}</ListItem.Subtitle>
                 <View>{l.work_day.includes(weekDay) ? <Text style={{color:"green"}}>Available</Text> :<Text style={{color:"red"}}>Unavailable</Text>}</View>
               </ListItem.Content>
+              <ListItem.Chevron />
             </ListItem> : <View key={i}/>
             
           ))
@@ -156,14 +108,18 @@ class DLScreen extends React.Component {
             <View style={styles.modalView}>
 
               <Text style={styles.modalText}>{doctor}</Text>
-              <Text>Gender: {gender}</Text>
-              <Text>Language: {language}</Text>
+              <View style = {styles.modalDes}>
+              <Text style ={{fontSize:19}}>Gender: <Text style ={{fontSize:17}}>{gender}</Text></Text>
+              <Text style ={{fontSize:19}}>Language:  <Text style ={{fontSize:17}}>{language}</Text></Text>
+              <Text style ={{fontSize:19}}>Hospital:  <Text style ={{fontSize:17}}>{hospitalName}</Text></Text>
+              </View>
+              
               <TouchableHighlight
                 style={{ ...styles.modalButton, backgroundColor: isAvailable? "#2196F3":"grey" }}
                 onPress={()=>{
                   if(isAvailable === true) {
                     this.setModalVisible(!modalVisible);
-                    this.props.navigation.navigate("ChooseTime",{doctor:doctor,date:date,hospital:hospital,hospitalAddress:hospitalAddress,unWork:unWork});
+                    this.props.navigation.navigate("ChooseTime",{doctor:doctor,date:date, doctorID: doctorID, hospitalID: hospitalID});
                   } else {
                     alert("Sorry, this GP cannot be booked today");
                   }
@@ -210,7 +166,6 @@ const styles = StyleSheet.create({
     modalView: {
       margin: 20,
       backgroundColor: "white",
-      borderRadius: 20,
       padding: 35,
       alignItems: "center",
       shadowColor: "#000",
@@ -236,7 +191,12 @@ const styles = StyleSheet.create({
     modalText: {
       marginBottom: 15,
       textAlign: "center",
-      fontSize: 20,
+      fontSize: 23,
+      fontWeight:"bold",
+    },
+    modalDes: {
+      justifyContent:"space-evenly",
+      height: 150,
     }
   });
 
