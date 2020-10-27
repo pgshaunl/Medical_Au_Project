@@ -1,134 +1,131 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, TextInput,Image} from 'react-native';
 import Header from '../components/Header';
-import {Picker} from '@react-native-community/picker';
+import firebase from '@react-native-firebase/app';
+var chinese_english = require('../translation/chinese_english.json');
 
 
 class ITScreen extends React.Component {
-  state = {
-    input: '',
-    output: '',
-    language_input: 'English',
-    language_output: 'Japanese'
+   constructor(props) {
+       super(props);
+       this.state = { 
+           input: '' ,
+           output: ''
+       };
+   }
+   render() {
+       return (
+         <View>
+             <Header/>
+           <View style = { Style.parent } >
+           
+
+           <Text style = { Style.chineseLabel } >
+               Type something in Chinese:
+           </Text>
+
+           <TextInput style = { Style.textInput } 
+               onChangeText={(text)=>this._onTextInputChangeText(text)} 
+               value={this.state.input} 
+               onSubmitEditing = { this.showMeaning.bind(this) }/>
+         
+           <Text style = { Style.englishLabel } >
+              English equivalent is:
+           </Text>
+
+
+         <View style = { Style.textOutput }>
+           <Text style = { Style.englishWord } >      
+               {this.state.output}          
+           </Text>
+         </View>
+          
+       </View>
+      </View>
+
+       
+       
+
+       );
    }
 
- handleInput = (text) => {
-    this.setState({ input: text })
- }
- handlePOutput = (text) => {
-    this.setState({ output: text })
- }
- submit = (input, output) => {
-    alert('English: ' + input + ' 英语: ' + output)
- }
+   _onTextInputChangeText(text) {
+       //alert(text);
+       this.setState({
+           input : text
+       })
+   }
 
-   render() {
+   showMeaning() {
+       var meaning = this.state.input in chinese_english ? 
+                       chinese_english[this.state.input] : 
+                       "Not Found";
    
-    return (
-      <View>
-        <Header/>
-         
-         <TextInput style = {styles.input}
-               underlineColorAndroid = "transparent"
-               placeholder = "Put your text here"
-               placeholderTextColor = "black"
-               autoCapitalize = "none"
-               onChangeText = {this.handleinput}/>
-            
-         <TextInput style = {styles.input}
-               underlineColorAndroid = "transparent"
-               placeholder = "Translated text appears here"
-               placeholderTextColor = "black"
-               autoCapitalize = "none"
-               onChangeText = {this.handleoutput}/>
-
-
-               
-         <View style={{flexDirection: 'row', justifyContent: 'space-evenly',margin: 20}}>              
-
-            <Picker
-               selectedValue={this.state.language_input}
-               style={{height: 50, width: 100}}
-               onValueChange={(itemValue, itemIndex) =>
-               this.setState({language_input: itemValue})
-            }>
-            <Picker.Item label="English" value="En" />
-            <Picker.Item label="Chinese" value="Cn" />
-            <Picker.Item label="Japanese" value="Jp" />
-            </Picker>
-            
-            <Image
-               source={require('../img/icons/Arrow.png')}
-               style={styles.image}
-            />
-          
-            <Picker
-            selectedValue={this.state.language_output}
-            style={{height: 50, width: 100}}
-            onValueChange={(itemValue, itemIndex) =>
-            this.setState({language_output: itemValue})
-            }>
-            <Picker.Item label="English" value="En" />
-            <Picker.Item label="Chinese" value="Cn" />
-            <Picker.Item label="Japanese" value="Jp" />
-            </Picker>
-         </View>
-        
-
-        
-         <TouchableOpacity
-            style = {styles.submitButton}
-               onPress = {
-                  () => this.submit(this.state.input, this.state.output)
-               }>
-            <Image 
-               style={{width: 50, height: 50}}
-               source={require("../img/icons/microphone.png")}
-            />
-         </TouchableOpacity>
-
-         
-
-            
-   </View>
-    );
-  }
+       // Update the state
+       this.setState({
+           output: meaning 
+       });
+   }
 }
+var Style = StyleSheet.create({
+   container: {
+   flex: 1,
+   justifyContent: 'center',
+   alignItems: 'center',
+   backgroundColor: '#F5FCFF',
+ },
+ welcome: {
+   fontSize: 20,
+   textAlign: 'center',
+   margin: 10,
+ },
+ instructions: {
+   textAlign: 'center',
+   color: '#333333',
+   marginBottom: 5,
+ },
+ textInput: {
+   margin: 15,
+   height: 150,
+   borderColor: 'black',
+   borderRadius: 20 ,
+   textAlign: 'center',
+   fontSize: 30,
 
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      flexDirection: 'column',
-      justifyContent: 'space-between'
-    },
-      input: {
-         margin: 15,
-         height: 150,
-         borderColor: 'black',
-         borderRadius: 20 ,
-         textAlign: 'center',
-         borderWidth: 1
-      },
-      submitButton: {
+  
+   borderWidth: 1
    
-         alignItems: 'center',
-         margin: 25
 
-      },
+ },
+ textOutput: {
+   margin: 15,
+   height: 150,
+   borderColor: 'black',
+   borderRadius: 20 ,
+   textAlign: 'center',
+   borderWidth: 1
+
+ },
+   parent: {
+       padding: 16
+   },
+   chineseLabel: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 25,
+},
+   englishLabel: {
+       marginTop: 60,
+       fontWeight: 'bold',
+       fontSize: 25,
+       textAlign: 'center',
+   },
+   englishWord: {
+      marginTop: 50,
+       fontSize: 30,
+       fontStyle: 'italic',
+       textAlign: 'center',
      
-      image: {
-         tintColor: "#000000",
-         resizeMode: "contain",
-         height: 40,
-         width: 40,
-         alignItems: 'center'
-         
-       },
-    
-   
-
-   })
-
-
+   }
+});
 export default ITScreen;
