@@ -56,7 +56,7 @@ const TimeScreen = (props) => {
         var weekday = weekDay.toString();
         var arr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-        return day+'/'+month+'/'+year +' '+ arr[weekday];
+        return (date.getDate()<10?'0':'') +day +  '/'+(date.getMonth() < 9?'0':'') + month +'/'+year +' '+ arr[weekday];
     };
 
     function getDate() {
@@ -65,7 +65,7 @@ const TimeScreen = (props) => {
       var month = (date.getMonth()+1).toString();
       var day = date.getDate().toString();
 
-      return day+'/'+month+'/'+year;
+      return (date.getDate()<10?'0':'') +day+(date.getMonth() < 9?'0':'') + month+year;
       };
 
     const list = [
