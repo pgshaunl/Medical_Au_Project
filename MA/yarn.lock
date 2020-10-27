@@ -740,6 +740,13 @@
   dependencies:
     "@types/hammerjs" "^2.0.36"
 
+"@fawazahmed/react-native-read-more@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@fawazahmed/react-native-read-more/-/react-native-read-more-1.0.8.tgz#a2dc4792d01720a5d1027925abb289cfa384074c"
+  integrity sha512-FSHtgzQGFYegsP7uRlsFYAzBHZ1wf0Ebv5JO8p/vkYhq+invN4co6ccuLdQiyTa99GoohMnf6oxGICnDuKafbQ==
+  dependencies:
+    prop-types "^15.7.2"
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"

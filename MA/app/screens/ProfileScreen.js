@@ -16,7 +16,8 @@ export default function ProfileScreen()  {
   const [input, setInput] = useState('');
   const [placeHolder, setPlaceHolder] = useState('');
   const [description, setDescription] = useState('');
-   
+  const [headline, setHeadline] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
 
   const { user, logout } = useContext(AuthContext);
 
@@ -31,9 +32,7 @@ export default function ProfileScreen()  {
   [])
 
   
-  
-  
-  
+
 
     const update =() => {
       database().ref(`/user/${user.uid}`).update({
@@ -57,7 +56,7 @@ export default function ProfileScreen()  {
       {
         title: "Name",
         descprition: "Input your name here",
-        icon: 'person-outline',
+        icon: 'portrait',
         subtitle: name,
       },
       {
