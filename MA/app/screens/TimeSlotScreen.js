@@ -1,9 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView} from 'react-native';
-import { ListItem, Avatar } from 'react-native-elements';
+import { ListItem } from 'react-native-elements';
 import Header from '../components/Header';
 import {timeSlot} from '../components/TimeSlot';
 import { windowHeight } from '../utils/Dimensions';
+import database from '@react-native-firebase/database';
 
 class TimeSlotScreen extends React.Component {
   constructor(props) {
@@ -11,9 +12,22 @@ class TimeSlotScreen extends React.Component {
   
   }
 
+  state = {
+    occupationList: [],
+  }
 
 
+  componentDidMount() {
+    database().ref(`/Occupation/${this.props.route.params.doctorID}/${this.props.route.params.date}`).on('value', snapshot => {
+      if (snapshot.exists()) {
+        this.setState({occupationList: snapshot.val().timeSlot})
+      } 
+    });
+  }
 
+  isNotAvailable = (slot) => {
+    return this.state.occupationList.includes(slot);
+  }
   render() {
   const {date,doctorID, hospitalID} = this.props.route.params;
     
@@ -21,12 +35,13 @@ class TimeSlotScreen extends React.Component {
     return (
       <View>
            <Header/>
+          
           <View style = {{height: windowHeight - 130}}>
           <ScrollView persistentScrollbar = {true}>
         {
           timeSlot.map((l, i) => (
              <ListItem key={i} bottomDivider  onPress={()=>{
-              if(1!==1) {
+              if(this.isNotAvailable(i)) {
                   alert("Sorry, the period has been booked")
               }else {
                 
@@ -38,7 +53,7 @@ class TimeSlotScreen extends React.Component {
           }}>
               <ListItem.Content>
                 <ListItem.Title  >{l}</ListItem.Title>
-                <ListItem.Subtitle >{1===1 ? <Text style={{color:"green"}}>Tap to book</Text> :<Text style={{color:"red"}}>Booked</Text>}</ListItem.Subtitle>
+                <ListItem.Subtitle >{!this.isNotAvailable(i) ? <Text style={{color:"green"}}>Tap to book</Text> :<Text style={{color:"red"}}>Booked</Text>}</ListItem.Subtitle>
               </ListItem.Content>
               <ListItem.Chevron />
             </ListItem>
