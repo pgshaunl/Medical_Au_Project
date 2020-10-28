@@ -116,7 +116,7 @@ export default function ProfileScreen()  {
         <FormButton buttonTitle='Update profile' onPress={() => update()} />
       <TouchableOpacity
         style={styles.navButton}
-        onPress={() => () => logout()}
+        onPress={() => logout()}
       >
         <Text style={styles.navButtonText}>Tap me to Log out your account</Text>
       </TouchableOpacity>
