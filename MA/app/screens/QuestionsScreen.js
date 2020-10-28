@@ -138,7 +138,7 @@ class QuestionsScreen extends React.Component {
                                     watermelon : value
                                 })
 
-                                console.log(watermelon)
+                               
 
                                 if (watermelon === false) {
                                     var list = food;
@@ -151,7 +151,7 @@ class QuestionsScreen extends React.Component {
                                     this.setState({food: list})
                                     
                                 }
-                                console.log(food.toString())
+                                
                             }
                                 }
 
@@ -182,7 +182,6 @@ class QuestionsScreen extends React.Component {
                                     this.setState({food: list})
                                     
                                 }
-                                console.log(food.toString())
                             }
                                 }
                         />
@@ -207,7 +206,7 @@ class QuestionsScreen extends React.Component {
                                     this.setState({food: list})
                                     
                                 }
-                                console.log(food.toString())
+                                
 
                             }
                                 }
@@ -233,7 +232,7 @@ class QuestionsScreen extends React.Component {
                                     this.setState({food: list})
                                     
                                 }
-                                console.log(food.toString())
+                                
                             }
                                }
                         />

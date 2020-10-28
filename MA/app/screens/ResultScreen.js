@@ -46,7 +46,7 @@ class ResultScreen extends React.Component {
                const tempType = list[i].type;
                const result = list[i].result;
                const suggestion = list[i].suggestion;
-               console.log(tempLocation.includes(location.toLowerCase()))
+               
                if (
                    arrayConsist(food, tempFood) && 
                    (tempLocation.includes(location.toLowerCase()) || location === "") &&
