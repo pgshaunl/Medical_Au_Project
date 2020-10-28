@@ -8,29 +8,37 @@ import FormButton from '../components/FormButton';
 class QuestionsScreen extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            language: null,
-            Burning:false,
-            painValue:"Burning",
-            locatedValue:"Middle"
+            uncomfy:"where",
+            painValue:"",
+            locatedValue:"",
+            food: [],
+            watermelon: false,
+            icecream: false,
+            seafood: false,
+            beer: false,
+            food: [],
         };
     }
 
     render() {
+        const {watermelon, icecream, seafood, beer, food, painValue, locatedValue, uncomfy} = this.state;
+        const {type} = this.props.route.params;
         return (
             <View style={{flex:1, backgroundColor:"white"}}>
                 <Header/>
                 <View>
                 <ScrollView>
-                    <Text style={styles.topText}>Adult Symptom</Text>
+                    <Text style={styles.topText}>Symptom of {type} </Text>
                     <View style={styles.questionTitle}>
                         <Image style={styles.image} source={require('../img/icons/ic_question.jpg')} resizeMode={"center"}></Image>
                         <View style={styles.border}>
                             <Picker
                                 mode="dropdown"
-                                selectedValue={this.state.language}
-                                onValueChange={(lang) => this.setState({language: lang})}>
-                                <Picker.Item label="Where are you uncomfortable?" value="Where" />
+                                selectedValue={this.state.uncomfy}
+                                onValueChange={(lang) => this.setState({uncomfy: lang})}>
+                                <Picker.Item label="Where are you uncomfortable?" value="where" />
                                 <Picker.Item label="Diarrhea" value="Diarrhea" />
                                 <Picker.Item label="Anorexia" value="Anorexia" />
                                 <Picker.Item label="Toothache" value="Toothache" />
@@ -44,7 +52,7 @@ class QuestionsScreen extends React.Component {
                         <View style={styles.checkboxContainer}>
                             <CheckBox
                                 value={this.state.painValue==="Burning"}
-                                onValueChange={(value) =>
+                                onValueChange={() =>
                                     this.setState({
                                         painValue : "Burning"
                                     })}
@@ -54,7 +62,7 @@ class QuestionsScreen extends React.Component {
                         <View style={styles.checkboxContainer}>
                             <CheckBox
                                 value={this.state.painValue==="Sudden"}
-                                onValueChange={(value) =>
+                                onValueChange={() =>
                                     this.setState({
                                         painValue : "Sudden"
                                     })}
@@ -66,17 +74,19 @@ class QuestionsScreen extends React.Component {
                         <View style={styles.checkboxContainer}>
                             <CheckBox
                                 value={this.state.painValue==="Ongoing"}
-                                onValueChange={(value) =>
+                                onValueChange={() =>{
                                     this.setState({
                                         painValue : "Ongoing"
-                                    })}
+                                    })
+                                }
+                                   }
                             />
                             <Text style={styles.label}>Ongoing</Text>
                         </View>
                         <View style={styles.checkboxContainer}>
                             <CheckBox
                                 value={this.state.painValue==="Crampy"}
-                                onValueChange={(value) =>
+                                onValueChange={() =>
                                     this.setState({
                                         painValue : "Crampy"
                                     })}
@@ -88,7 +98,7 @@ class QuestionsScreen extends React.Component {
                     <View style={styles.checkboxContainer}>
                         <CheckBox
                             value={this.state.locatedValue==="Middle"}
-                            onValueChange={(value) =>
+                            onValueChange={() =>
                                 this.setState({
                                     locatedValue : "Middle"
                                 })}
@@ -98,7 +108,7 @@ class QuestionsScreen extends React.Component {
                     <View style={styles.checkboxContainer}>
                         <CheckBox
                             value={this.state.locatedValue==="Low"}
-                            onValueChange={(value) =>
+                            onValueChange={() =>
                                 this.setState({
                                     locatedValue : "Low"
                                 })}
@@ -108,54 +118,124 @@ class QuestionsScreen extends React.Component {
                     <View style={styles.checkboxContainer}>
                         <CheckBox
                             value={this.state.locatedValue==="Upper"}
-                            onValueChange={(value) =>
+                            onValueChange={() =>
                                 this.setState({
                                     locatedValue : "Upper"
                                 })}
                         />
                         <Text style={styles.label}>Upper adbomen</Text>
                     </View>
-                    <View style={styles.questionTitle}>
+                    <View style={styles.questionTitle} >
                         <Image style={styles.image} source={require('../img/icons/ic_question.jpg')} resizeMode={"center"}></Image>
                         <Text style={styles.questionText}>Have you eaten the following foods ?</Text>
                     </View>
+
                     <View style={styles.checkboxContainer}>
                         <CheckBox
-                            value={this.state.Watermelon}
-                            onValueChange={(value) =>
+                            value={this.state.watermelon}
+                            onValueChange={(value) => {
                                 this.setState({
-                                    Watermelon : value
-                                })}
+                                    watermelon : value
+                                })
+
+                                console.log(watermelon)
+
+                                if (watermelon === false) {
+                                    var list = food;
+                                    list.push("watermelon");
+                                    this.setState({food: list})
+                                } else {
+                                    var list = food;
+                                    
+                                    list.splice(list.indexOf("watermelon"));
+                                    this.setState({food: list})
+                                    
+                                }
+                                console.log(food.toString())
+                            }
+                                }
+
+                                
+
+                            
                         />
                         <Text style={styles.label}>Watermelon</Text>
                     </View>
+                    
                     <View style={styles.checkboxContainer}>
                         <CheckBox
-                            value={this.state.Ice}
-                            onValueChange={(value) =>
+                            value={this.state.icecream}
+                            onValueChange={(value) => {
+
                                 this.setState({
-                                    Ice : value
-                                })}
+                                    icecream : value
+                                })
+
+                                if (icecream === false) {
+                                    var list = food;
+                                    list.push("icecream");
+                                    this.setState({food: list})
+                                } else {
+                                    var list = food;
+                                    
+                                    list.splice(list.indexOf("icecream"));
+                                    this.setState({food: list})
+                                    
+                                }
+                                console.log(food.toString())
+                            }
+                                }
                         />
                         <Text style={styles.label}>Ice-cream</Text>
                     </View>
                     <View style={styles.checkboxContainer}>
                         <CheckBox
-                            value={this.state.Sea}
-                            onValueChange={(value) =>
+                            value={this.state.seafood}
+                            onValueChange={(value) => {
                                 this.setState({
-                                    Sea : value
-                                })}
+                                    seafood : value
+                                })
+
+                                if (seafood === false) {
+                                    var list = food;
+                                    list.push("seafood");
+                                    this.setState({food: list})
+                                } else {
+                                    var list = food;
+                                    
+                                    list.splice(list.indexOf("seafood"));
+                                    this.setState({food: list})
+                                    
+                                }
+                                console.log(food.toString())
+
+                            }
+                                }
                         />
                         <Text style={styles.label}>Sea-food</Text>
                     </View>
                     <View style={styles.checkboxContainer}>
                         <CheckBox
-                            value={this.state.Beer}
-                            onValueChange={(value) =>
+                            value={this.state.beer}
+                            onValueChange={(value) =>{
                                 this.setState({
-                                    Beer : value
-                                })}
+                                    beer : value
+                                })
+
+                                if (beer === false) {
+                                    var list = food;
+                                    list.push("beer");
+                                    this.setState({food: list})
+                                } else {
+                                    var list = food;
+                                    
+                                    list.splice(list.indexOf("beer"));
+                                    this.setState({food: list})
+                                    
+                                }
+                                console.log(food.toString())
+                            }
+                               }
                         />
                         <Text style={styles.label}>Beer</Text>
                     </View>   
@@ -164,7 +244,12 @@ class QuestionsScreen extends React.Component {
                 
                 <View style={{alignItems:"center"}}>
                         <FormButton buttonTitle="See the result" onPress={()=>{
-                                              this.props.navigation.navigate('Result')
+                                            if (uncomfy !== "where" && painValue !== "") {
+                                                this.props.navigation.navigate('Result', {type: type, uncomfy: uncomfy, food: food, pain: painValue, location: locatedValue})
+                                            } else {
+                                                alert("Sorry, You have to fill all quetions in the form.")
+                                            }
+                                              
                                           }}></FormButton>
                                 
                        

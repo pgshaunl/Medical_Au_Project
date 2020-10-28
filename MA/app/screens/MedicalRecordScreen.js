@@ -9,35 +9,6 @@ import database from '@react-native-firebase/database';
 import {timeSlot} from '../components/TimeSlot';
 
 
-const list = [
-  {
-    date: '12/06/2019',
-    hospital: 'Southbank Hospital',
-    doctor: 'shuan'
-  },
-  {
-    date: '06/07/2020',
-    hospital: 'Higgg Hospital',
-    doctor: 'shuan'
-  },
-  {
-    date: '06/07/2020',
-    hospital: 'Higgg Hospital',
-    doctor: 'shuan'
-  },
-  {
-    date: '06/07/2020',
-    hospital: 'Higgg Hospital',
-    doctor: 'shuan'
-  },
-  {
-    date: '06/07/2020',
-    hospital: 'Higgg Hospital',
-    doctor: 'shuan'
-  },
-]
-
-
 class MRScreen extends React.Component {
   constructor(props) {
     super(props);

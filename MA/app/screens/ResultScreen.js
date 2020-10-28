@@ -1,60 +1,103 @@
 import React from 'react';
 import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Header from '../components/Header';
-import LinearGradient from "react-native-linear-gradient";
+
+import database from '@react-native-firebase/database';
+import FormButton from '../components/FormButton';
+
+const arrayConsist = (arr1, arr2) => {
+    if (arr1 === 0) {
+        return true;
+    } else {
+        return arr1.every(item => arr2.includes(item));
+    }
+} 
 
 class ResultScreen extends React.Component {
+    constructor(props) {
+        super(props);
 
+        this.state = {
+            type: this.props.route.params.type,
+            uncomfy: this.props.route.params.uncomfy, 
+            food: this.props.route.params.food, 
+            pain: this.props.route.params.pain, 
+            location: this.props.route.params.location,
+            result: "Unable to find the proper suggestion",
+            suggestion: ["How about book a doctor"],
+        }
+    }
+
+    
+
+
+    
+    componentDidMount() {
+        
+        database().ref(`/Symptomchecker`).on('value', snapshot => {
+           var list = Object.values(snapshot.val());
+           const {type, uncomfy, food, pain, location} = this.state;
+            
+           for (var i = 0; i < list.length; i++) {
+               const tempFood = list[i].food;
+               const tempLocation = list[i].pain_location;
+               const tempPain = list[i].status;
+               const tempUncomfy = list[i].symptom;
+               const tempType = list[i].type;
+               const result = list[i].result;
+               const suggestion = list[i].suggestion;
+               console.log(tempLocation.includes(location.toLowerCase()))
+               if (
+                   arrayConsist(food, tempFood) && 
+                   (tempLocation.includes(location.toLowerCase()) || location === "") &&
+                   pain.toUpperCase() === tempPain.toUpperCase() &&
+                   uncomfy.toUpperCase() === tempUncomfy.toUpperCase() &&
+                   type.toUpperCase() === tempType.toUpperCase()
+               ) {
+                   this.setState({
+                       result: result,
+                       suggestion: suggestion,
+                   })
+               }
+           };
+          });
+    }
 
     render() {
+        const {result, suggestion} = this.state;
         return (
             <View style={{flex:1, backgroundColor:"white"}}>
                 <Header/>
-                <ScrollView>
-                    <Text style={styles.leftLabel}>Result:</Text>
-
-                    <View style={{flexDirection:"row",margin:10}}>
+                <View style = {{height:430, justifyContent:"space-around"}}>
+                
+                    <View>
+                        <Text style={styles.leftLabel}>Result:</Text>
+                        <View style={{flexDirection:"row",margin:10}}>
                         <Image style={styles.image} source={require('../img/icons/ic_one.jpg')} resizeMode={"center"}></Image>
-
-                        <Text style={styles.border}>Have a cold</Text>
+                        <Text style={styles.border}>{result}</Text>
+                        </View>
                     </View>
-
+                    <View>
                     <Text style={styles.leftLabel}>Suggestion:</Text>
-                    <View style={{flexDirection:"row",margin:10}}>
+                    <View style={{flexDirection:"row", margin:13, alignItems:"center"}}>
                         <Image style={styles.image} source={require('../img/icons/ic_two.jpg')} resizeMode={"center"}></Image>
-                        <View style={{flexDirection:"column",marginLeft:20}}>
-                            <Text style={styles.label}>1. Drink more water</Text>
-                            <Text style={styles.label}>2. Take more rest</Text>
-                            <Text style={styles.label}>1. Take cold medicine</Text>
-                            <Text style={styles.label}>1. Don‘t eat seafood</Text>
+                        <View style={styles.suggestionBox}>
+                            {
+                                suggestion.map((l, i) => (
+                                <Text style={styles.label}>{i + 1}. {l}</Text>
+                                ))
+                            }
                         </View>
                     </View>
 
-                    <Text style={styles.hitText}>Do you need an online booking?</Text>
-                    <View style={{ alignItems:"center",
-                        justifyContent:"center"}}>
-                        <TouchableOpacity style={styles.rowItem}
-                                          onPress={()=>{
-                                              this.props.navigation.navigate('OnlineBooking')
-                                          }}>
-                            <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                                            colors={['#2b78d4', '#46bbab']}
-                                            style={{
-                                                padding:12,
-                                                marginTop:20,
-                                                borderRadius:8,
-                                                width:200,
+                    </View>   
+                
+                </View>
+                <View style={{ alignItems:"center",justifyContent:"center"}}>
+                <Text style={styles.hitText}>Do you need an online booking?</Text>
+                <FormButton buttonTitle = "Online Booking" onPress={()=> this.props.navigation.navigate('OnlineBooking')} />
 
-                                            }}>
-
-                                <Text style={styles.imgText}>Online booking</Text>
-
-                            </LinearGradient>
-                        </TouchableOpacity>
-
-                    </View>
-
-                </ScrollView>
+                </View>
 
             </View>
         );
@@ -79,24 +122,31 @@ const styles = StyleSheet.create({
         borderColor:"#E5E5E5",
         textAlign:"center",
         lineHeight:40,
-        fontSize:20,
+        fontSize:18,
         marginLeft:15,
         
     },
     label: {
-        fontSize:20,
-        
+        fontSize:16,
+        marginBottom:10,
     },
     hitText: {
         marginTop:40,
         textAlign:"center",
-        fontSize:20,
+        fontSize:17,
     },
     imgText: {
         textAlign:"center",
         fontSize:20,
         color: "white",
     },
+    suggestionBox: {
+        flexDirection:"column", 
+        marginLeft:20, 
+        width:270, 
+        height: 150,
+        justifyContent: 'center',
+    }
 
 });
 
