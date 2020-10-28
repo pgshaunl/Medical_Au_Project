@@ -23,7 +23,7 @@ class ResultScreen extends React.Component {
             food: this.props.route.params.food, 
             pain: this.props.route.params.pain, 
             location: this.props.route.params.location,
-            result: "Unable to find the proper suggestion",
+            result: "Cannot find a result",
             suggestion: ["How about book a doctor"],
         }
     }
