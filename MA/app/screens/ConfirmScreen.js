@@ -69,19 +69,19 @@ class ConfirmScreen extends React.Component  {
         };
 
         // Use doctorID as index to set bookcourt
-      if (this.state.favourite !== 0) {
-        var tempNum = this.state.favourite + 1;
+      // if (this.state.favourite !== 0) {
+      //   var tempNum = this.state.favourite + 1;
 
-          database().ref(`/Favourite/${firebase.auth().currentUser.uid}/${this.props.route.params.doctorID}`).update({
-            bookCount: tempNum
+      //     database().ref(`/Favourite/${firebase.auth().currentUser.uid}/DID${this.props.route.params.doctorID}`).update({
+      //       bookCount: tempNum
             
-          });
-      } else {
-        database().ref(`/Favourite/${firebase.auth().currentUser.uid}/${this.props.route.params.doctorID}`).update({
-          bookCount: 1,
+      //     });
+      // } else {
+      //   database().ref(`/Favourite/${firebase.auth().currentUser.uid}/DID${this.props.route.params.doctorID}`).update({
+      //     bookCount: 1,
           
-        });
-      };
+      //   });
+      // };
 
       Alert.alert(
         "Message",
@@ -95,6 +95,25 @@ class ConfirmScreen extends React.Component  {
       );
       }
     });
+
+
+
+      // Use doctorID as index to set bookcourt
+      if (this.state.favourite !== 0) {
+        var tempNum = this.state.favourite + 1;
+
+          database().ref(`/Favourite/${firebase.auth().currentUser.uid}/DID${this.props.route.params.doctorID}`).update({
+            bookCount: tempNum
+            
+          });
+      } else {
+        database().ref(`/Favourite/${firebase.auth().currentUser.uid}/DID${this.props.route.params.doctorID}`).update({
+          bookCount: 1,
+          
+        });
+      };
+
+    
   }
 
   
