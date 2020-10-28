@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect} from 'react';
 import database from '@react-native-firebase/database';
-import { StyleSheet, Text, View, TouchableHighlight, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight,TouchableOpacity, Alert } from 'react-native';
 import { AuthContext } from '../navigation/AuthProvider';
 import FormButton from '../components/FormButton';
 import Header from '../components/Header';
@@ -111,8 +111,18 @@ export default function ProfileScreen()  {
     ))
   }
 </View>
-      <FormButton buttonTitle='Logout' onPress={() => logout()} />
-      <FormButton buttonTitle='Update profile' onPress={() => update()} />
+      <View style = {{height : 250, alignItems:"center", justifyContent:"center"}}>
+        <View style = {{alignItems:"center"}}>
+        <FormButton buttonTitle='Update profile' onPress={() => update()} />
+      <TouchableOpacity
+        style={styles.navButton}
+        onPress={() => () => logout()}
+      >
+        <Text style={styles.navButtonText}>Tap me to Log out your account</Text>
+      </TouchableOpacity>
+        </View>
+      </View>
+     
       <View style={styles.centeredView}>
         <Modal
           animationType="slide"
@@ -220,6 +230,13 @@ const styles = StyleSheet.create({
     },
     input: {
       width: 100,
+    },
+    navButton: {
+      marginTop: 15
+    },
+    navButtonText: {
+      fontSize: 20,
+      color: '#008AD0'
     }
   });
 
