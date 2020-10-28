@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import Header from '../components/Header';
 import {TouchableHighlight} from "react-native-gesture-handler";
@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { ListItem } from 'react-native-elements';
 import firebase from '@react-native-firebase/app';
 import database from '@react-native-firebase/database';
+import {timeSlot} from '../components/TimeSlot';
 
 
 const list = [
@@ -44,29 +45,107 @@ class MRScreen extends React.Component {
 
   state = {
     name: '',
+    hospital:[],
+    doctor: [],
+    favourite: '',
+    appointment: [],
   }
 
-  state = {
-    modalVisible: false,
-    doctor: "111",
-    isAvailable: false,
-    gender: null,
-    language: null,
-    unWork:[-1,-2]
-  };
 
   setName = (name) => {
     this.setState({ name: name });
   }
 
   componentDidMount() {
-    database().ref(`/user/${firebase.auth().currentUser.uid}`).once('value', snapshot => {
+    database().ref(`/user/${firebase.auth().currentUser.uid}`).on('value', snapshot => {
       this.setName(snapshot.val().name);
     });
+   
+    database().ref(`/Appointment/${firebase.auth().currentUser.uid}`).on('value', snapshot => {
+      if (snapshot.exists()) {
+        var date = Object.keys(snapshot.val());
+        var value = Object.values(snapshot.val());
+        var list = [];
+
+        for (var i =0; i < date.length; i++) {
+          list.push(
+            {
+              date: date[i],
+              hid: value[i].hospitalID,
+              tid: value[i].timeID,
+              did: value[i].doctorID,
+            }
+          )
+          }
+
+       this.setState({appointment: list});
+      }});
+
+    database().ref(`/Favourite/${firebase.auth().currentUser.uid}/`).on('value', snapshot => {
+      if (snapshot.exists()) {
+        var hID = Object.keys(snapshot.val());
+        var bookCount = Object.values(snapshot.val());
+        var list =[];
+        var flag = 0;
+        var fav = '';
+
+        for (var i =0; i < hID.length; i++) {
+         var id = hID[i].split('DID')[1];
+
+          if (bookCount[i].bookCount > flag) {
+
+            fav = id;
+            flag = bookCount[i].bookCount;
+          }
+          
+        }
+
+        this.setState({favourite: fav})
+      }});
+      
+        database().ref(`/Doctor/`).on('value', snapshot => {
+          var list =[];
+          var value = Object.values(snapshot.val());
+
+          for (var i =0; i < value.length; i++) {
+            list.push(
+              
+                value[i].doctor_name,
+                
+              
+            )
+          }
+          
+          this.setState({doctor: list})
+        });
+    
+        database().ref(`/Hospital/`).on('value', snapshot => {
+          
+          var list =[];
+          var value = Object.values(snapshot.val());
+
+          for (var i =0; i < value.length; i++) {
+            list.push(
+              
+                value[i].hospital_name,
+                
+              
+            )
+          }
+
+          this.setState({hospital: list})
+        });
+
+
+
+
   }
 
+  
+
+
   render() {
-   
+    const {name, hospital, doctor, favourite, appointment} = this.state;
     return (
       <View>
         <View>
@@ -82,7 +161,7 @@ class MRScreen extends React.Component {
         </TouchableHighlight>
      </View>
       <View style={{justifyContent:"center" , margin:10, width:250}}>
-        <Text style={{fontSize:25, margin:10, fontWeight:"bold"}} >{this.state.name}</Text>
+        <Text style={{fontSize:25, margin:10, fontWeight:"bold"}} >{name}</Text>
         <Text style={{fontSize:20, margin:7, color:"#13C7DC"}}>{firebase.auth().currentUser.email}</Text>
       </View>
       </View>
@@ -91,12 +170,13 @@ class MRScreen extends React.Component {
           <Text style={styles.headline}>My Appointment</Text>
           <ScrollView>
             {
-              list.map((item, i) => (
+              appointment.map((item, i) => (
                 <ListItem key={i} bottomDivider>
                   <ListItem.Content >
-              <ListItem.Title style={{fontWeight:"bold"}}>{item.date}</ListItem.Title>
-              <ListItem.Subtitle><Text style={{fontWeight:"bold" }}>    Hospital:</Text> {item.hospital}</ListItem.Subtitle>
-              <ListItem.Subtitle><Text style={{fontWeight:"bold"}}>    Doctor:</Text> {item.doctor}</ListItem.Subtitle>
+              <ListItem.Title style={{fontWeight:"bold"}}>{dateDisplayHelper(item.date)}</ListItem.Title>
+              <ListItem.Subtitle><Text style={{fontWeight:"bold" }}>    Hospital:</Text> {hospital[item.hid]}</ListItem.Subtitle>
+              <ListItem.Subtitle><Text style={{fontWeight:"bold"}}>    Doctor:</Text> {doctor[item.did]}</ListItem.Subtitle>
+              <ListItem.Subtitle><Text style={{fontWeight:"bold"}}>    Time:</Text> {timeSlot[item.tid]}</ListItem.Subtitle>
                   </ListItem.Content>
                   <ListItem.Chevron />
                 </ListItem>
@@ -109,12 +189,12 @@ class MRScreen extends React.Component {
           <Text style={styles.headline}>My Basic Information</Text>
           <View style={styles.ifContainer}>
             <Icon name="heart" color="red" size={30} />
-          <Text style={styles.ifText}>Favourite Doctors   {list.length}</Text>
+          <Text style={styles.ifText}>Favourite Doctor:   {doctor[favourite]}</Text>
           </View>
 
           <View style={styles.ifContainer}>
           <Icon name="rotate-right" color="black" size={30} />
-          <Text style={styles.ifText}>Appointment time   {list.length}</Text>
+          <Text style={styles.ifText}>Appointment time   {appointment.length}</Text>
           </View>
           
       </View>
@@ -169,5 +249,10 @@ const styles = StyleSheet.create({
       width:300,
     },
   });
+
+  const dateDisplayHelper = (dateString) => {
+    var list = dateString.split("");
+    return list[0] + list[1]  +"/"+ list[2] + list[3] +"/"+ list[4] + list[5] + list[6] + list[7];
+}
 
 export default MRScreen;

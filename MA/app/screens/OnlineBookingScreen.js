@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Header from '../components/Header';
-import Search from './SearchHomeScreen';
 import {Picker} from '@react-native-community/picker';
 import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
