@@ -8,9 +8,7 @@ import MRScreen from '../screens/MedicalRecordScreen';
 import OBScreen from '../screens/OnlineBookingScreen';
 import SCScreen from '../screens/SymptomCheckerScreen';
 import QuestionsScreen from "../screens/QuestionsScreen";
-import ResultAdultScreen from "../screens/ResultAdultScreen";
-import ResultChildScreen from "../screens/ResultChildScreen";
-import QuestionsChildScreen from "../screens/QuestionsChildScreen";
+import ResultScreen from "../screens/ResultScreen";
 import TimeSlotScreen from "../screens/TimeSlotScreen";
 import ConfirmScreen from "../screens/ConfirmScreen";
 import HLScreen from "../screens/HospitalListScreen";
@@ -123,27 +121,14 @@ export default function HomeStack() {
      )   
      
      })}/>
-      <Stack.Screen name="QuestionsChild" component={QuestionsChildScreen} options={({navigation}) => ({ title: 'Symptom Checker', headerRight: ()=>(
+      
+      <Stack.Screen name="Result" component={ResultScreen} options={({navigation}) => ({ title: 'Symptom Checker', headerRight: ()=>(
         <Icon name="home"
               onPress={() => navigation.navigate("Home")}
               size={30} color="white" style={{marginRight:20}}/>
      )   
-     
      })}/>
-      <Stack.Screen name="ResultAdult" component={ResultAdultScreen} options={({navigation}) => ({ title: 'Symptom Checker', headerRight: ()=>(
-        <Icon name="home"
-              onPress={() => navigation.navigate("Home")}
-              size={30} color="white" style={{marginRight:20}}/>
-     )   
-     
-     })}/>
-      <Stack.Screen name="ResultChild" component={ResultChildScreen} options={({navigation}) => ({ title: 'Symptom Checker', headerRight: ()=>(
-        <Icon name="home"
-              onPress={() => navigation.navigate("Home")}
-              size={30} color="white" style={{marginRight:20}}/>
-     )   
-     
-     })}/>
+      
 
      <Stack.Screen name="Profile" component={ProfileScreen} options={({navigation}) => ({ title: 'Profile', headerRight: ()=>(
         <Icon name="home"

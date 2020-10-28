@@ -3,6 +3,7 @@ import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'reac
 import Header from '../components/Header';
 import CheckBox from '@react-native-community/checkbox';
 import {Picker} from '@react-native-community/picker';
+import FormButton from '../components/FormButton';
 
 class QuestionsScreen extends React.Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class QuestionsScreen extends React.Component {
         return (
             <View style={{flex:1, backgroundColor:"white"}}>
                 <Header/>
+                <View>
                 <ScrollView>
                     <Text style={styles.topText}>Adult Symptom</Text>
                     <View style={styles.questionTitle}>
@@ -156,19 +158,18 @@ class QuestionsScreen extends React.Component {
                                 })}
                         />
                         <Text style={styles.label}>Beer</Text>
-                    </View>
-
-                    <View style={{flexDirection:"row-reverse",marginRight:10}}>
-
-                        <TouchableOpacity style={styles.rowItem}
-                                          onPress={()=>{
-                                              this.props.navigation.navigate('ResultAdult')
-                                          }}>
-                            <Image style={styles.image} source={require('../img/icons/right-arrow.jpg')} resizeMode={"center"}></Image>
-                        </TouchableOpacity>
-                    </View>
+                    </View>   
                 </ScrollView>
-
+                </View>
+                
+                <View style={{alignItems:"center"}}>
+                        <FormButton buttonTitle="See the result" onPress={()=>{
+                                              this.props.navigation.navigate('Result')
+                                          }}></FormButton>
+                                
+                       
+                       
+                    </View>
             </View>
         );
     }
@@ -177,14 +178,13 @@ class QuestionsScreen extends React.Component {
 const styles = StyleSheet.create({
     topText: {
         margin:10,
-        fontSize:17,
-        //color: "#2243e3",
-        //textDecorationLine:"underline"
+        fontSize:20,
+        fontWeight:"bold"
+        
     },
     leftLabel: {
         margin:10,
         fontSize:16,
-        //textDecorationLine:"underline"
     },
 
     questionTitle: {

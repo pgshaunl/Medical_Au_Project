@@ -3,7 +3,7 @@ import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react
 import Header from '../components/Header';
 import LinearGradient from "react-native-linear-gradient";
 
-class ResultAdultScreen extends React.Component {
+class ResultScreen extends React.Component {
 
 
     render() {
@@ -27,7 +27,6 @@ class ResultAdultScreen extends React.Component {
                             <Text style={styles.label}>2. Take more rest</Text>
                             <Text style={styles.label}>1. Take cold medicine</Text>
                             <Text style={styles.label}>1. Don‘t eat seafood</Text>
-                            <Text style={styles.label}>....</Text>
                         </View>
                     </View>
 
@@ -47,6 +46,7 @@ class ResultAdultScreen extends React.Component {
                                                 width:200,
 
                                             }}>
+
                                 <Text style={styles.imgText}>Online booking</Text>
 
                             </LinearGradient>
@@ -64,7 +64,7 @@ class ResultAdultScreen extends React.Component {
 const styles = StyleSheet.create({
     leftLabel: {
         margin:10,
-        fontSize:20,
+        fontSize:22,
         fontWeight:"bold"
     },
     image:{
@@ -77,16 +77,15 @@ const styles = StyleSheet.create({
         borderWidth:1.5,
         borderRadius:16,
         borderColor:"#E5E5E5",
-        color: "#1ebae3",
         textAlign:"center",
         lineHeight:40,
-        fontSize:18,
+        fontSize:20,
         marginLeft:15,
-        textDecorationLine:"underline"
+        
     },
     label: {
         fontSize:20,
-        fontWeight:"bold"
+        
     },
     hitText: {
         marginTop:40,
@@ -101,4 +100,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default ResultAdultScreen;
+export default ResultScreen;
