@@ -160,7 +160,7 @@ class MRScreen extends React.Component {
           <Text style={styles.headline}>My Basic Information</Text>
           <View style={styles.ifContainer}>
             <Icon name="heart" color="red" size={30} />
-          <Text style={styles.ifText}>Favourite Doctor:   {doctor[favourite]}</Text>
+          <Text style={styles.ifText}>Favourite Doctor:   {doctor.length === 0 ? "No record" : doctor[favourite]}</Text>
           </View>
 
           <View style={styles.ifContainer}>
