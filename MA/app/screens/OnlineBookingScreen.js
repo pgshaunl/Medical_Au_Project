@@ -24,11 +24,8 @@ class OBScreen extends React.Component {
     return (
       <View>
         <Header/>
-        <View style = {{flexDirection: 'row', justifyContent:"center"}}>
-        {/*<Search/>*/}
-      </View>
 
-      <View style = {{flexDirection: 'column', justifyContent:"center", alignItems:"center", padding:10}}>
+      <View style = {{flexDirection: 'column', justifyContent:"center", alignItems:"center", padding:10, height :400}}>
 
       <View style = {styles.container}>
         <Text style={styles.header} >Step 1</Text>

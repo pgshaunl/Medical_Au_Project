@@ -12,7 +12,7 @@ class SCScreen extends React.Component {
                 <View style={styles.container}>
                     <TouchableOpacity style={styles.rowItem}
                                       onPress={()=>{
-                                          this.props.navigation.navigate('Questions')
+                                          this.props.navigation.navigate('Questions', {type: 'adult'})
                                       }}>
                         <View style={styles.rowItem}>
                             <Image style={styles.image} source={require('../img/icons/ic_audlt.jpg')} resizeMode={"center"}></Image>
@@ -31,7 +31,7 @@ class SCScreen extends React.Component {
 
                     <TouchableOpacity style={styles.rowItem}
                                       onPress={()=>{
-                                          this.props.navigation.navigate('QuestionsChild')
+                                          this.props.navigation.navigate('Questions',  {type: 'child'})
                                       }}>
                         <View style={styles.rowItem}>
                             <Image style={styles.image} source={require('../img/icons/ic_child.jpg')} resizeMode={"center"}></Image>
