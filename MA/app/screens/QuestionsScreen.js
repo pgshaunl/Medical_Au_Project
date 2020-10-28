@@ -103,7 +103,7 @@ class QuestionsScreen extends React.Component {
                                     locatedValue : "Middle"
                                 })}
                         />
-                        <Text style={styles.label}>Middle adbomen</Text>
+                        <Text style={styles.label}>Middle</Text>
                     </View>
                     <View style={styles.checkboxContainer}>
                         <CheckBox
@@ -113,7 +113,7 @@ class QuestionsScreen extends React.Component {
                                     locatedValue : "Low"
                                 })}
                         />
-                        <Text style={styles.label}>Low adbomen</Text>
+                        <Text style={styles.label}>Low</Text>
                     </View>
                     <View style={styles.checkboxContainer}>
                         <CheckBox
@@ -123,7 +123,7 @@ class QuestionsScreen extends React.Component {
                                     locatedValue : "Upper"
                                 })}
                         />
-                        <Text style={styles.label}>Upper adbomen</Text>
+                        <Text style={styles.label}>Upper</Text>
                     </View>
                     <View style={styles.questionTitle} >
                         <Image style={styles.image} source={require('../img/icons/ic_question.jpg')} resizeMode={"center"}></Image>
